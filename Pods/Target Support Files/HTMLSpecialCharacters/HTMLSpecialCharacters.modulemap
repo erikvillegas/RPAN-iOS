@@ -1,0 +1,6 @@
+framework module HTMLSpecialCharacters {
+  umbrella header "HTMLSpecialCharacters-umbrella.h"
+
+  export *
+  module * { export * }
+}

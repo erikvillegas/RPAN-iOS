@@ -1,0 +1,6 @@
+framework module LNParallaxTVCell {
+  umbrella header "LNParallaxTVCell-umbrella.h"
+
+  export *
+  module * { export * }
+}
