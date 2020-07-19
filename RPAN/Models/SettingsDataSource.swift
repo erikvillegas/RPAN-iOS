@@ -10,6 +10,6 @@ import Foundation
 
 enum SettingsDataSource {
     case account
-    case subscriptions
+    case notifications
     case support
 }

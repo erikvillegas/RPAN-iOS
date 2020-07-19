@@ -31,7 +31,13 @@ class SettingsViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Settings"
-        self.view.backgroundColor = Colors.white
+        
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = UIColor.systemBackground
+        }
+        else {
+            self.view.backgroundColor = UIColor.white
+        }
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -157,10 +163,10 @@ class SettingsViewController: UIViewController {
         self.userSubscriptions = userSubscriptions.sorted(by: { $0.username.lowercased() < $1.username.lowercased() })
         
         if userSubscriptions.isEmpty {
-            self.datasource = [.account, .support]
+            self.datasource = [.account]
         }
         else {
-            self.datasource = [.account, .subscriptions, .support]
+            self.datasource = [.account, .notifications]
         }
         
         self.tableView.reloadData()
@@ -203,8 +209,8 @@ extension SettingsViewController: UITableViewDataSource {
         switch self.datasource[section] {
         case .account:
             return 1
-        case .subscriptions:
-            return self.userSubscriptions.count + 1 // one extra for global notifications cell
+        case .notifications:
+            return self.userSubscriptions.count + 1 // one extra for global notifications cell, and another for sounds
         case .support:
             return 1
         }
@@ -227,7 +233,7 @@ extension SettingsViewController: UITableViewDataSource {
             }
             
             return cell
-        case .subscriptions:
+        case .notifications:
             if indexPath.row == 0 {
                 guard let cell = tableView.dequeueReusableCell(withIdentifier: NotificationSettingCell.reuseId, for: indexPath) as? NotificationSettingCell else {
                     return UITableViewCell()
@@ -268,7 +274,7 @@ extension SettingsViewController: UITableViewDelegate {
         switch self.datasource[section] {
         case .account:
             return "Account"
-        case .subscriptions:
+        case .notifications:
             return "Notifications"
         case .support:
             return nil
@@ -299,8 +305,8 @@ extension SettingsViewController: UITableViewDelegate {
             else {
                 return "This will allow you to import users you follow on Reddit."
             }
-        case .subscriptions:
-            return nil
+        case .notifications:
+            return "App designed and developed with ♥️ by u/erikvillegas"
         case .support:
             return "If you're enjoying this app and want to help cover the notification server costs and developer membership fees, consider buying me a coffee! Thanks, you rock! 😎\n\nApp designed and developed with ♥️ by u/erikvillegas"
         }
@@ -319,7 +325,8 @@ extension SettingsViewController: UITableViewDelegate {
             .foregroundColor: Colors.darkGray
         ], range: NSMakeRange(0, text.count))
         
-        if sectionType == .support {
+        // TODO: change this to .support when adding back donation link
+        if sectionType == .notifications {
              attributedString.addAttributes([
                 .link: "https://www.reddit.com/user/erikvillegas",
              ], range: (text as NSString).range(of: "u/erikvillegas"))

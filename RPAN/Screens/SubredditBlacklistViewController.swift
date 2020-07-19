@@ -78,7 +78,13 @@ class SubredditBlacklistViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "Subreddits"
-        self.view.backgroundColor = Colors.white
+        
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = UIColor.systemBackground
+        }
+        else {
+            self.view.backgroundColor = UIColor.white
+        }
         
         self.view.addSubview(self.tableView)
         self.tableView.edgesToSuperview()

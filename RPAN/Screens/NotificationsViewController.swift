@@ -32,7 +32,13 @@ class NotificationsViewController: UIViewController {
         super.viewDidLoad()
         
         self.title = "u/" + self.userSubscription.username
-        self.view.backgroundColor = Colors.white
+        
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = UIColor.systemBackground
+        }
+        else {
+            self.view.backgroundColor = UIColor.white
+        }
         
         self.view.addSubview(self.tableView)
         self.tableView.edgesToSuperview()
@@ -97,7 +103,7 @@ extension NotificationsViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0: return 3
+        case 0: return 4
         case 1: return 1
         default: return 0
         }
@@ -113,8 +119,21 @@ extension NotificationsViewController: UITableViewDataSource {
                 
                 return cell
             case 1:
-                let cell = LimitToSubredditsCell(style: .default, reuseIdentifier: nil)
+                let cell = TitleDetailCell(style: .default, reuseIdentifier: nil)
+                
+                cell.titleLabel.text = "Notification Sound"
+                cell.detailLabel.text = "Default" // todo
+                
+                let globalNotificationsOn = UserDefaultsService.shared.bool(forKey: .globalNotificationsOn)
+                cell.titleLabel.alpha = globalNotificationsOn ? 1.0 : 0.5
+                cell.detailLabel.alpha = globalNotificationsOn ? 1.0 : 0.5
+                
+                return cell
+            case 2:
+                let cell = TitleDetailCell(style: .default, reuseIdentifier: nil)
                 let subredditCount = self.userSubscription.subredditBlacklist.count
+                
+                cell.titleLabel.text = "Ignore broadcasts from subreddits"
                 cell.detailLabel.text = subredditCount > 0 ? String(self.userSubscription.subredditBlacklist.count) : nil
                 
                 cell.selectionStyle = self.userSubscription.notify ? .default : .none
@@ -122,7 +141,7 @@ extension NotificationsViewController: UITableViewDataSource {
                 cell.detailLabel.alpha = self.userSubscription.notify ? 1.0 : 0.5
                 
                 return cell
-            case 2:
+            case 3:
                 let cell = NotificationSettingCell(style: .default, reuseIdentifier: nil)
                 cell.configure(title: "Cooldown Enabled", enabled: self.userSubscription.cooldown)
                 cell.enabledSwitch.addTarget(self, action: #selector(cooldownSwitchToggled(sender:)), for: .valueChanged)
@@ -178,12 +197,17 @@ extension NotificationsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
-        if indexPath.section == 0 && indexPath.row == 1 {
-            guard self.userSubscription.notify else { return }
-            let vc = SubredditBlacklistViewController(userSubscription: self.userSubscription)
-            vc.delegate = self
-            self.navigationController?.pushViewController(vc, animated: true)
-            AnalyticsService.shared.logScreenView(SubredditBlacklistViewController.self)
+        if indexPath.section == 0 {
+            if indexPath.row == 1 {
+                self.navigationController?.pushViewController(SoundsViewController(), animated: true)
+            }
+            else if indexPath.row == 2 {
+                guard self.userSubscription.notify else { return }
+                let vc = SubredditBlacklistViewController(userSubscription: self.userSubscription)
+                vc.delegate = self
+                self.navigationController?.pushViewController(vc, animated: true)
+                AnalyticsService.shared.logScreenView(SubredditBlacklistViewController.self)
+            }
         }
         else if indexPath.section == 1 { // unfavorite user
             let message = "You will no longer receive notifications for this user and their streams won't appear at the top of your feed"

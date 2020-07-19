@@ -16,7 +16,7 @@ class DonationButtonCell: UITableViewCell {
     })
     
     let titleLabel = UILabel(labelInit: {
-        $0.text = "Support Me On Ko-fi!"
+        $0.text = "Support This App On Ko-fi!"
         $0.textAlignment = .center
         $0.font = Fonts.regular.size16
         $0.textColor = Colors.primaryOrange

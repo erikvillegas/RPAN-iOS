@@ -52,7 +52,7 @@
 		158F263124C0BA2F0007CE60 /* DonationButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263024C0BA2F0007CE60 /* DonationButtonCell.swift */; };
 		158F263324C0BA430007CE60 /* UserSubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263224C0BA430007CE60 /* UserSubscriptionCell.swift */; };
 		158F263524C0BA570007CE60 /* SettingsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263424C0BA570007CE60 /* SettingsDataSource.swift */; };
-		158F263724C0BA7A0007CE60 /* LimitToSubredditsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263624C0BA7A0007CE60 /* LimitToSubredditsCell.swift */; };
+		158F263724C0BA7A0007CE60 /* TitleDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263624C0BA7A0007CE60 /* TitleDetailCell.swift */; };
 		158F263924C0BA9B0007CE60 /* NotificationSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263824C0BA9B0007CE60 /* NotificationSettingCell.swift */; };
 		158F263B24C0BAD10007CE60 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263A24C0BAD10007CE60 /* User.swift */; };
 		158F263D24C0BADE0007CE60 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263C24C0BADE0007CE60 /* NotificationNames.swift */; };
@@ -69,6 +69,30 @@
 		158F265324C0BD0E0007CE60 /* RedditAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F265224C0BD0E0007CE60 /* RedditAPIError.swift */; };
 		158F265524C0BD1B0007CE60 /* RedditAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F265424C0BD1A0007CE60 /* RedditAccessToken.swift */; };
 		158F265724C0CC700007CE60 /* BroadcastLoadingIndicatorMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F265624C0CC700007CE60 /* BroadcastLoadingIndicatorMethod.swift */; };
+		15B763F524C48CE200D25092 /* remember-the-milk.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763DE24C48CC200D25092 /* remember-the-milk.caf */; };
+		15B763F624C48CE200D25092 /* hello.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763DF24C48CC300D25092 /* hello.caf */; };
+		15B763F724C48CE200D25092 /* confirmed.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763E024C48CC500D25092 /* confirmed.caf */; };
+		15B763F824C48CE200D25092 /* reminder.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763E124C48CC600D25092 /* reminder.caf */; };
+		15B763F924C48CE200D25092 /* mind-you.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763E224C48CC800D25092 /* mind-you.caf */; };
+		15B763FA24C48CE200D25092 /* waiting-for.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763E324C48CC900D25092 /* waiting-for.caf */; };
+		15B763FB24C48CE200D25092 /* whistle.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763E424C48CCB00D25092 /* whistle.caf */; };
+		15B763FC24C48CE200D25092 /* read-me.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763E524C48CCC00D25092 /* read-me.caf */; };
+		15B763FD24C48CE200D25092 /* affirmed.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763E624C48CCE00D25092 /* affirmed.caf */; };
+		15B763FE24C48CE200D25092 /* enter.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763E724C48CCF00D25092 /* enter.caf */; };
+		15B763FF24C48CE200D25092 /* glassy.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763E824C48CD100D25092 /* glassy.caf */; };
+		15B7640024C48CE200D25092 /* try-again.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763E924C48CD200D25092 /* try-again.caf */; };
+		15B7640124C48CE200D25092 /* done.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763EA24C48CD400D25092 /* done.caf */; };
+		15B7640224C48CE200D25092 /* attention.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763EB24C48CD600D25092 /* attention.caf */; };
+		15B7640324C48CE300D25092 /* prompt.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763EC24C48CD700D25092 /* prompt.caf */; };
+		15B7640424C48CE300D25092 /* question.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763ED24C48CD900D25092 /* question.caf */; };
+		15B7640524C48CE300D25092 /* well-done.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763EE24C48CDA00D25092 /* well-done.caf */; };
+		15B7640624C48CE300D25092 /* yep.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763EF24C48CDB00D25092 /* yep.caf */; };
+		15B7640724C48CE300D25092 /* finale.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763F024C48CDD00D25092 /* finale.caf */; };
+		15B7640824C48CE300D25092 /* classy.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763F124C48CDE00D25092 /* classy.caf */; };
+		15B7640924C48CE300D25092 /* news.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763F224C48CE000D25092 /* news.caf */; };
+		15B7640A24C48CE300D25092 /* answer.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763F324C48CE100D25092 /* answer.caf */; };
+		15B7640B24C48CE300D25092 /* chord.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763F424C48CE200D25092 /* chord.caf */; };
+		15B7640D24C49BB400D25092 /* SoundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B7640C24C49BB400D25092 /* SoundsViewController.swift */; };
 		15EBF8C724BC6462009E4C7C /* SubredditBlacklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EBF8C624BC6462009E4C7C /* SubredditBlacklistViewController.swift */; };
 		15F4803024BDCCE200EFC323 /* CrashService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F4802F24BDCCE200EFC323 /* CrashService.swift */; };
 		15F4803224BDD12800EFC323 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F4803124BDD12800EFC323 /* AnalyticsService.swift */; };
@@ -152,7 +176,7 @@
 		158F263024C0BA2F0007CE60 /* DonationButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DonationButtonCell.swift; sourceTree = "<group>"; };
 		158F263224C0BA430007CE60 /* UserSubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSubscriptionCell.swift; sourceTree = "<group>"; };
 		158F263424C0BA570007CE60 /* SettingsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataSource.swift; sourceTree = "<group>"; };
-		158F263624C0BA7A0007CE60 /* LimitToSubredditsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LimitToSubredditsCell.swift; sourceTree = "<group>"; };
+		158F263624C0BA7A0007CE60 /* TitleDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleDetailCell.swift; sourceTree = "<group>"; };
 		158F263824C0BA9B0007CE60 /* NotificationSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingCell.swift; sourceTree = "<group>"; };
 		158F263A24C0BAD10007CE60 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		158F263C24C0BADE0007CE60 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
@@ -169,6 +193,30 @@
 		158F265224C0BD0E0007CE60 /* RedditAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditAPIError.swift; sourceTree = "<group>"; };
 		158F265424C0BD1A0007CE60 /* RedditAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditAccessToken.swift; sourceTree = "<group>"; };
 		158F265624C0CC700007CE60 /* BroadcastLoadingIndicatorMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastLoadingIndicatorMethod.swift; sourceTree = "<group>"; };
+		15B763DE24C48CC200D25092 /* remember-the-milk.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "remember-the-milk.caf"; sourceTree = "<group>"; };
+		15B763DF24C48CC300D25092 /* hello.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hello.caf; sourceTree = "<group>"; };
+		15B763E024C48CC500D25092 /* confirmed.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = confirmed.caf; sourceTree = "<group>"; };
+		15B763E124C48CC600D25092 /* reminder.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = reminder.caf; sourceTree = "<group>"; };
+		15B763E224C48CC800D25092 /* mind-you.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "mind-you.caf"; sourceTree = "<group>"; };
+		15B763E324C48CC900D25092 /* waiting-for.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "waiting-for.caf"; sourceTree = "<group>"; };
+		15B763E424C48CCB00D25092 /* whistle.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = whistle.caf; sourceTree = "<group>"; };
+		15B763E524C48CCC00D25092 /* read-me.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "read-me.caf"; sourceTree = "<group>"; };
+		15B763E624C48CCE00D25092 /* affirmed.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = affirmed.caf; sourceTree = "<group>"; };
+		15B763E724C48CCF00D25092 /* enter.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = enter.caf; sourceTree = "<group>"; };
+		15B763E824C48CD100D25092 /* glassy.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = glassy.caf; sourceTree = "<group>"; };
+		15B763E924C48CD200D25092 /* try-again.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "try-again.caf"; sourceTree = "<group>"; };
+		15B763EA24C48CD400D25092 /* done.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = done.caf; sourceTree = "<group>"; };
+		15B763EB24C48CD600D25092 /* attention.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = attention.caf; sourceTree = "<group>"; };
+		15B763EC24C48CD700D25092 /* prompt.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = prompt.caf; sourceTree = "<group>"; };
+		15B763ED24C48CD900D25092 /* question.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = question.caf; sourceTree = "<group>"; };
+		15B763EE24C48CDA00D25092 /* well-done.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "well-done.caf"; sourceTree = "<group>"; };
+		15B763EF24C48CDB00D25092 /* yep.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = yep.caf; sourceTree = "<group>"; };
+		15B763F024C48CDD00D25092 /* finale.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = finale.caf; sourceTree = "<group>"; };
+		15B763F124C48CDE00D25092 /* classy.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = classy.caf; sourceTree = "<group>"; };
+		15B763F224C48CE000D25092 /* news.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = news.caf; sourceTree = "<group>"; };
+		15B763F324C48CE100D25092 /* answer.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = answer.caf; sourceTree = "<group>"; };
+		15B763F424C48CE200D25092 /* chord.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chord.caf; sourceTree = "<group>"; };
+		15B7640C24C49BB400D25092 /* SoundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsViewController.swift; sourceTree = "<group>"; };
 		15EBF8C624BC6462009E4C7C /* SubredditBlacklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubredditBlacklistViewController.swift; sourceTree = "<group>"; };
 		15F4802F24BDCCE200EFC323 /* CrashService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashService.swift; sourceTree = "<group>"; };
 		15F4803124BDD12800EFC323 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
@@ -256,6 +304,29 @@
 				152062BC24B5284900D47F2E /* Models */,
 				1520628E24B5208100D47F2E /* Extensions */,
 				1520628F24B5209300D47F2E /* Resources */,
+				15B763E624C48CCE00D25092 /* affirmed.caf */,
+				15B763F324C48CE100D25092 /* answer.caf */,
+				15B763EB24C48CD600D25092 /* attention.caf */,
+				15B763F424C48CE200D25092 /* chord.caf */,
+				15B763F124C48CDE00D25092 /* classy.caf */,
+				15B763E024C48CC500D25092 /* confirmed.caf */,
+				15B763EA24C48CD400D25092 /* done.caf */,
+				15B763E724C48CCF00D25092 /* enter.caf */,
+				15B763F024C48CDD00D25092 /* finale.caf */,
+				15B763E824C48CD100D25092 /* glassy.caf */,
+				15B763DF24C48CC300D25092 /* hello.caf */,
+				15B763E224C48CC800D25092 /* mind-you.caf */,
+				15B763F224C48CE000D25092 /* news.caf */,
+				15B763EC24C48CD700D25092 /* prompt.caf */,
+				15B763ED24C48CD900D25092 /* question.caf */,
+				15B763E524C48CCC00D25092 /* read-me.caf */,
+				15B763DE24C48CC200D25092 /* remember-the-milk.caf */,
+				15B763E124C48CC600D25092 /* reminder.caf */,
+				15B763E924C48CD200D25092 /* try-again.caf */,
+				15B763E324C48CC900D25092 /* waiting-for.caf */,
+				15B763EE24C48CDA00D25092 /* well-done.caf */,
+				15B763E424C48CCB00D25092 /* whistle.caf */,
+				15B763EF24C48CDB00D25092 /* yep.caf */,
 			);
 			path = RPAN;
 			sourceTree = "<group>";
@@ -279,6 +350,7 @@
 				151CF86B24B8D53E00C4C3D8 /* SettingsViewController.swift */,
 				151CF88524BA877100C4C3D8 /* NotificationsViewController.swift */,
 				15EBF8C624BC6462009E4C7C /* SubredditBlacklistViewController.swift */,
+				15B7640C24C49BB400D25092 /* SoundsViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -357,7 +429,7 @@
 				158F262E24C0BA190007CE60 /* ActionButtonCell.swift */,
 				158F263024C0BA2F0007CE60 /* DonationButtonCell.swift */,
 				158F263224C0BA430007CE60 /* UserSubscriptionCell.swift */,
-				158F263624C0BA7A0007CE60 /* LimitToSubredditsCell.swift */,
+				158F263624C0BA7A0007CE60 /* TitleDetailCell.swift */,
 				158F263824C0BA9B0007CE60 /* NotificationSettingCell.swift */,
 			);
 			path = Cells;
@@ -478,11 +550,34 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				15B7640924C48CE300D25092 /* news.caf in Resources */,
+				15B763FC24C48CE200D25092 /* read-me.caf in Resources */,
+				15B763FB24C48CE200D25092 /* whistle.caf in Resources */,
+				15B763F824C48CE200D25092 /* reminder.caf in Resources */,
+				15B7640824C48CE300D25092 /* classy.caf in Resources */,
+				15B7640224C48CE200D25092 /* attention.caf in Resources */,
+				15B7640424C48CE300D25092 /* question.caf in Resources */,
 				152062B924B523F900D47F2E /* Podfile in Resources */,
 				1520628524B502EF00D47F2E /* LaunchScreen.storyboard in Resources */,
+				15B7640324C48CE300D25092 /* prompt.caf in Resources */,
 				151CF86E24B8F4AB00C4C3D8 /* GoogleService-Info.plist in Resources */,
+				15B763F524C48CE200D25092 /* remember-the-milk.caf in Resources */,
 				151CF86624B7014A00C4C3D8 /* reddift_config.json in Resources */,
+				15B763F624C48CE200D25092 /* hello.caf in Resources */,
+				15B7640724C48CE300D25092 /* finale.caf in Resources */,
+				15B7640124C48CE200D25092 /* done.caf in Resources */,
+				15B7640024C48CE200D25092 /* try-again.caf in Resources */,
+				15B763FD24C48CE200D25092 /* affirmed.caf in Resources */,
+				15B763F924C48CE200D25092 /* mind-you.caf in Resources */,
+				15B763F724C48CE200D25092 /* confirmed.caf in Resources */,
+				15B763FA24C48CE200D25092 /* waiting-for.caf in Resources */,
+				15B763FF24C48CE200D25092 /* glassy.caf in Resources */,
 				1520628224B502EF00D47F2E /* Assets.xcassets in Resources */,
+				15B7640624C48CE300D25092 /* yep.caf in Resources */,
+				15B7640B24C48CE300D25092 /* chord.caf in Resources */,
+				15B7640524C48CE300D25092 /* well-done.caf in Resources */,
+				15B7640A24C48CE300D25092 /* answer.caf in Resources */,
+				15B763FE24C48CE200D25092 /* enter.caf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +690,7 @@
 				152062B724B5238900D47F2E /* CustomJSONDecoder.swift in Sources */,
 				1520627D24B502E900D47F2E /* HomeViewController.swift in Sources */,
 				1520629924B5217F00D47F2E /* CustomOperators.swift in Sources */,
+				15B7640D24C49BB400D25092 /* SoundsViewController.swift in Sources */,
 				152062AF24B5229700D47F2E /* UIViewController+SimpleAlert.swift in Sources */,
 				151CF86C24B8D53E00C4C3D8 /* SettingsViewController.swift in Sources */,
 				158F263124C0BA2F0007CE60 /* DonationButtonCell.swift in Sources */,
@@ -626,7 +722,7 @@
 				152062A124B521BD00D47F2E /* Int+Extensions.swift in Sources */,
 				158F262D24C0BA000007CE60 /* UIViewController+Extensions.swift in Sources */,
 				1520629F24B521BA00D47F2E /* Double+Extensions.swift in Sources */,
-				158F263724C0BA7A0007CE60 /* LimitToSubredditsCell.swift in Sources */,
+				158F263724C0BA7A0007CE60 /* TitleDetailCell.swift in Sources */,
 				158F264F24C0BCEB0007CE60 /* RedditResponse.swift in Sources */,
 				158F264724C0BB270007CE60 /* SettingsServiceError.swift in Sources */,
 				152062B124B522A600D47F2E /* URL+Extensions.swift in Sources */,

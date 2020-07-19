@@ -1,5 +1,5 @@
 //
-//  LimitToSubredditsCell.swift
+//  TitleDetailCell.swift
 //  RPAN
 //
 //  Created by Erik Villegas on 7/16/20.
@@ -8,9 +8,8 @@
 
 import UIKit
 
-class LimitToSubredditsCell: UITableViewCell {
+class TitleDetailCell: UITableViewCell {
     let titleLabel = UILabel(labelInit: {
-        $0.text = "Ignore broadcasts from subreddits"
         $0.font = Fonts.regular.size16
         $0.textColor = Colors.primaryOrange
     })
