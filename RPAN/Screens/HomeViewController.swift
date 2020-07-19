@@ -83,7 +83,7 @@ class HomeViewController: UIViewController {
         switch loadingMethod {
         case .showIfEmpty(let message):
             if self.broadcasts.isEmpty {
-                self.displayToast(message: message, theme: .info, duration: .indefinite(delay: 1.2, minimum: 2.0))
+                self.displayToast(message: message, theme: .info, duration: .indefinite(delay: 1.2, minimum: 0.2))
             }
         case .showImmediately(let message):
             self.displayToast(message: message, theme: .info)
