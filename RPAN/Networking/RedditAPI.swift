@@ -16,7 +16,8 @@ class RedditAPI {
     let baseUrl = URL(string: "https://strapi.reddit.com")!
     
     func broadcasts() -> Promise<[Broadcast]> {
-        return attempt(maximumRetryCount: 3) {
+//        return after(.seconds(5)).then {
+        return self.attempt(maximumRetryCount: 3) {
             return self.redditAccessToken().then { accessToken -> Promise<[Broadcast]> in
                 let url = self.baseUrl.appendingPathComponent("broadcasts")
                 let request = Session.default.request(url, method: .get, headers: ["Authorization": "Bearer \(accessToken.value)"])
@@ -24,6 +25,7 @@ class RedditAPI {
                 return request.responseDecodable(type: RedditResponse<[Broadcast]>.self).map { $0.data }
             }
         }
+//        }
     }
     
     private func redditAccessToken() -> Promise<RedditAccessToken> {

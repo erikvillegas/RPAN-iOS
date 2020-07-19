@@ -86,19 +86,57 @@ class SettingsService {
             return Promise(error: SettingsServiceError.loggedOut)
         }
         
+        return self.importUserSubscriptionsRecursively(session: Session(token: token), iteration: 1).then { userSubscriptions -> Promise<[UserSubscription]> in
+            print("compiled \(userSubscriptions.count) userSubscriptions")
+            
+            var userSubscriptionsUpdated = userSubscriptions
+            
+            // ensure we don't accidentally re-import a user they've specifically unsubscribed from
+            let unsubscribedUserList = UserDefaultsService.shared.array(forKey: .unsubscribedUserList) ?? []
+            userSubscriptionsUpdated.removeAll(where: { unsubscribedUserList.contains($0.username) })
+            
+            return self.persistFavorites(userSubscriptions: userSubscriptionsUpdated)
+        }
+    }
+    
+    /// Recursive function to load all user subscriptions. Needed since Reddit API only returns 25 per page
+    /// `iteration` records which iteration we're currently on to prevent infinite loops
+    /// https://github.com/mxcl/PromiseKit/issues/623
+    func importUserSubscriptionsRecursively(
+        session: reddift.Session,
+        existingUserSubscriptions: [UserSubscription] = [],
+        paginator: Paginator = Paginator(),
+        iteration: Int) -> Promise<[UserSubscription]> {
+        
+        return self.importUserSubscriptionsPaginated(
+            session: session,
+            existingUserSubscriptions: existingUserSubscriptions,
+            paginator: paginator,
+            iteration: iteration)
+        .then { userSubscriptions, newPaginator, iteration -> Promise<[UserSubscription]> in
+            if newPaginator.isVacant || iteration > 10 {
+                return Promise.value(userSubscriptions)
+            }
+            else {
+                return self.importUserSubscriptionsRecursively(session: session, existingUserSubscriptions: userSubscriptions, paginator: newPaginator, iteration: iteration).map { $0 }
+            }
+        }
+    }
+    
+    /// Fetches a page of user subscriptions
+    func importUserSubscriptionsPaginated(
+        session: reddift.Session,
+        existingUserSubscriptions: [UserSubscription] = [],
+        paginator: Paginator = Paginator(),
+        iteration: Int) -> Promise<([UserSubscription], Paginator, Int)> {
+        
         return Promise { seal in
             do {
-                let session = Session(token: token)
-                try session.getUserRelatedSubreddit(.subscriber, paginator: Paginator(), completion: { result in
+                try session.getUserRelatedSubreddit(.subscriber, paginator: paginator, completion: { result in
                     switch result {
                     case .success(let listing):
-                        // ensure we don't accidentally re-import a user they've specifically unsubscribed from
-                        let unsubscribedUserList = UserDefaultsService.shared.array(forKey: .unsubscribedUserList) ?? []
-                        
-                        var userSubscriptions = listing.asUserSubscriptions(notify: true)
-                        userSubscriptions.removeAll(where: { unsubscribedUserList.contains($0.username) })
-                        
-                        seal.fulfill(userSubscriptions)
+                        let newUserSubscriptions = listing.asUserSubscriptions(notify: true)
+                        seal.fulfill((newUserSubscriptions + existingUserSubscriptions, listing.paginator, iteration + 1))
                     case .failure(let error):
                         seal.reject(error)
                     }
@@ -107,8 +145,6 @@ class SettingsService {
             catch {
                 seal.reject(error)
             }
-        }.then { userSubscriptions in
-            return self.persistFavorites(userSubscriptions: userSubscriptions)
         }
     }
     
