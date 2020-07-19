@@ -16,7 +16,7 @@ class BroadcastCell: UITableViewCell {
     
     let thumbnailMaskView = UIView(viewInit: {
         $0.layer.cornerRadius = 4.0
-        $0.layer.borderColor = Colors.lightGray.cgColor
+        $0.layer.borderColor = Colors.dynamicThumbnailHighlight.cgColor
         $0.layer.borderWidth = 1
         $0.layer.shadowColor = UIColor.black.cgColor
         $0.layer.shadowOffset = CGSize(width: 0, height: 2.0)
@@ -60,8 +60,8 @@ class BroadcastCell: UITableViewCell {
     
     let titleLabel = UILabel(labelInit: {
         $0.font = Fonts.bold.size16
-        $0.textColor = Colors.reallyDarkGray
-        $0.numberOfLines = 2
+        $0.textColor =  Colors.dynamicSystemTitle
+        $0.numberOfLines = 3
         $0.adjustsFontSizeToFitWidth = true
         $0.minimumScaleFactor = 0.75
     })
@@ -106,10 +106,13 @@ class BroadcastCell: UITableViewCell {
         $0.spacing = 5.0
     }
     
-    lazy var mainStackView = UIStackView([self.thumbnailStackView, self.labelStackView, SpacerView.horizontal, self.subscribeButton]) {
+    let mainStackViewSpacerView = SpacerView.horizontal
+    
+    lazy var mainStackView = UIStackView([self.thumbnailStackView, self.labelStackView, self.mainStackViewSpacerView, self.subscribeButton]) {
         $0.axis = .horizontal
         $0.spacing = 0
         $0.setCustomSpacing(16, after: self.thumbnailStackView)
+        $0.setCustomSpacing(4, after: self.mainStackViewSpacerView)
     }
     
     var timeIndicatorWidthConstraint: NSLayoutConstraint?
@@ -129,6 +132,11 @@ class BroadcastCell: UITableViewCell {
         self.contentView.addSubview(self.thumbnailAwardImageView)
         self.thumbnailAwardImageView.left(to: self.thumbnailMaskView, offset: -8)
         self.thumbnailAwardImageView.top(to: self.thumbnailMaskView, offset: -8)
+        
+        let selectedBackgroundView = UIView()
+        selectedBackgroundView.backgroundColor = Colors.dynamicCellSelected
+        self.selectedBackgroundView = selectedBackgroundView
+        
     }
     
     required init?(coder: NSCoder) { fatalError() }

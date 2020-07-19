@@ -166,7 +166,7 @@ extension NotificationsViewController: UITableViewDelegate {
         let label = UILabel(labelInit: {
             $0.text = self.tableView(tableView, titleForHeaderInSection: section)
             $0.font = Fonts.bold.size18
-            $0.textColor = Colors.reallyDarkGray
+            $0.textColor = Colors.dynamicSystemTitle
         })
         
         containerView.addSubview(label)

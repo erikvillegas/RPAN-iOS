@@ -46,7 +46,13 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.white
+        
+        if #available(iOS 13.0, *) {
+            self.view.backgroundColor = UIColor.systemBackground
+        }
+        else {
+            self.view.backgroundColor = UIColor.white
+        }
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
@@ -64,7 +70,7 @@ class HomeViewController: UIViewController {
         self.refreshControl.addTarget(self, action: #selector(fetchBroadcastsWithDelay), for: .valueChanged)
         self.tableView.refreshControl = self.refreshControl
         
-        self.fetchBroadcasts(loadingMethod: .showIfEmpty(message: "Loading RPAN Broadcasts..."))
+        self.fetchBroadcasts(loadingMethod: .showIfEmpty(message: "Loading Broadcasts..."))
         
         self.importFollowers()
         
@@ -75,7 +81,7 @@ class HomeViewController: UIViewController {
     
     @objc func checkForStaleBroadcasts() {
         if Date().timeIntervalSince(self.broadcastsFetchTimestamp) > 60 {
-            self.fetchBroadcasts(loadingMethod: .showImmediately(message: "Updating RPAN Broadcasts..."), delay: .milliseconds(1000))
+            self.fetchBroadcasts(loadingMethod: .showImmediately(message: "Loading Broadcasts..."), delay: .milliseconds(1000))
         }
     }
     
