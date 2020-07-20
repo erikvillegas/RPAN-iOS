@@ -1,35 +1,44 @@
 # RPAN Companion (iOS)
 
+[Check here](https://erikvillegas.github.io) for instructions on installing this app on your iOS device!
+
+### What is this?
+RPAN Companion makes it easy to see who is streaming on RPAN. It's like a slightly prettier version of [RPAN Lister](https://dextronix.github.io/RPAN-lister/). Watched a cool stream? Simply tap the star to have their streams pinned to the top whenever they're next online. You can even enable notifications to receive a push within seconds of the broadcaster going live!
+
+### How does it work?
+This app leverages the same API used by [RPAN Lister](https://dextronix.github.io/RPAN-lister/), and connects to your Reddit account via OAuth2 to pull in all followers. My notification server runs 24/7 to check when your favorited broadcaster go live, and sends you a push notification right to your phone. To help manage notification chaos, the app provides plenty of configuration options so you can tweak them per your liking.
+
 ### Compiling source code
-You'll need a Mac and Xcode 11 to run the code. All dependencies except two should already be included in this repo, so all you should have to do is open RPAN.xcworkspace and click the play button to run the app in the simulator! The first excluded dependency is  `GoogleService-Info.plist` that contains API keys that connect to Firestore. The second is `reddift_config.json` which contains the client ID for accessing the Reddit API. If you'd like to run a clone of the app pointed to a different server, you'll have to create these yourself. Otherwise message me to use the ones I use!
+You'll need a Mac and Xcode 11 to run the code. All dependencies except two should already be included in this repo, so all you should have to do is open RPAN.xcworkspace and click the play button to run the app in the simulator! The first excluded dependency is  `GoogleService-Info.plist` that contains API keys that connect to Firestore. The second is `reddift_config.json` which contains the client ID for accessing the Reddit API. If you'd like to run a clone of the app pointed to a different server, you'll have to create these yourself. [Message me](http://reddit.com/user/erikvillegas) if you're serious about compiling and I'd be happy to help!
 
 ### Home screen
 This screen relies on the same API the browser uses to show the top broadcast: https://strapi.reddit.com/broadcasts. This maps to the [Broadcast](https://github.com/erikvillegas/RPAN-iOS/blob/master/RPAN/Models/Broadcast.swift) model, and is used on the home screen to populate all the broadcasts. The networking code for this can be found in [RedditAPI.swift](https://github.com/erikvillegas/RPAN-iOS/blob/master/RPAN/Networking/RedditAPI.swift).
 
-![Alt text](https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Home.png?raw=true "Home")
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Home.png?raw=true" width="30%">
 
 ### Settings screen
 This screen lets the user:
 1. Manage all users they have favorited on the home screen. See "Notifications screen".
 2. Connect their Reddit account so they can import followers into favorites. See "Reddit integration".
 
-![Alt text](https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Settings.png?raw=true "Settings")
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Settings.png?raw=true" width="30%">
 
-![Alt text](https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/SettingsLoggedOut.png?raw=true "SettingsLoggedOut")
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/SettingsLoggedOut.png?raw=true" width="30%">
 
 ### Notifications screen
 This screen lets the user update their notification settings for the selected favorited broadcaster. The options include:
 1. Turning on/off notifications for the broadcaster.
 2. Disabling notifications when the broadcaster streams from specific RPAN subreddits.
 3. Enabling cooldown to avoid excessive notifications from the broadcaster's streams.
-4. Unfavorite the user.
+4. Setting a custom notification tone so the user can instantly know who is streaming without pulling out their phone.
+5. Unfavorite the user.
 
-![Alt text](https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Notifications.png?raw=true "Notifications")
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Notifications.png?raw=true" width="30%">
 
 ### Subreddit blacklist screen
 All subreddits are enabled by default unless otherwise disabled by the user. Users can disable specific ones here!
 
-![Alt text](https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/SubredditBlacklist.png?raw=true "Subreddit Blacklist")
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/SubredditBlacklist.png?raw=true" width="30%">
 
 ### Reddit Integration
 I created a Reddit "app" [here](https://old.reddit.com/prefs/apps/) that allows the iOS app to get an authorized access token for a user that grants access to their data. The code that initiates the login flow is in [LoginService.swift](https://github.com/erikvillegas/RPAN-iOS/blob/master/RPAN/Services/LoginService.swift). Scopes currently used are "identity", "mysubreddits", and "read".
