@@ -2,6 +2,9 @@
 
 [Check here](https://erikvillegas.github.io) for instructions on installing this app on your iOS device!
 
+### What is this?
+RPAN Companion makes it easy to see who is streaming on RPAN. It's like a slightly prettier version of [RPAN Lister](https://dextronix.github.io/RPAN-lister/). Watched a cool stream? Simply tap the star to have their streams pinned to the top whenever they're next online. You can even enable notifications to receive a push within seconds of the broadcaster going live!
+
 ### Compiling source code
 You'll need a Mac and Xcode 11 to run the code. All dependencies except two should already be included in this repo, so all you should have to do is open RPAN.xcworkspace and click the play button to run the app in the simulator! The first excluded dependency is  `GoogleService-Info.plist` that contains API keys that connect to Firestore. The second is `reddift_config.json` which contains the client ID for accessing the Reddit API. If you'd like to run a clone of the app pointed to a different server, you'll have to create these yourself. [Message me](http://reddit.com/user/erikvillegas) if you're serious about compiling and I'd be happy to help!
 
