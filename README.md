@@ -14,6 +14,7 @@ You'll need a Mac and Xcode 11 to run the code. All dependencies except two shou
 ### Home screen
 This screen relies on the same API the browser uses to show the top broadcast: https://strapi.reddit.com/broadcasts. This maps to the [Broadcast](https://github.com/erikvillegas/RPAN-iOS/blob/master/RPAN/Models/Broadcast.swift) model, and is used on the home screen to populate all the broadcasts. The networking code for this can be found in [RedditAPI.swift](https://github.com/erikvillegas/RPAN-iOS/blob/master/RPAN/Networking/RedditAPI.swift).
 
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Home.png?raw=true" width="40%">
 ![Alt text](https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Home.png?raw=true)
 
 ### Settings screen
