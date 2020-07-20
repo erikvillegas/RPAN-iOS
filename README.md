@@ -21,7 +21,7 @@ This screen lets the user:
 1. Manage all users they have favorited on the home screen. See "Notifications screen".
 2. Connect their Reddit account so they can import followers into favorites. See "Reddit integration".
 
-![Alt text](https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Settings.png?raw=true "Settings")
+![Alt text](https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Settings.png?raw=true "Settings" | width=100)
 
 ![Alt text](https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/SettingsLoggedOut.png?raw=true "SettingsLoggedOut")
 
