@@ -36,7 +36,7 @@ This screen lets the user update their notification settings for the selected fa
 <img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Notifications-Dark.png?raw=true" width="30%">
 
 ### Subreddit blacklist screen
-All subreddits are enabled by default unless otherwise disabled by the user. Users can disable specific ones here!
+All subreddits are enabled by default unless otherwise disabled by the user. Here is where they can to disable subreddits:
 
 <img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/SubredditBlacklist-Dark.png?raw=true" width="30%">
 
