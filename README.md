@@ -1,7 +1,9 @@
 # RPAN Companion (iOS)
 
+[Check here](https://erikvillegas.github.io) for instructions on installing this app on your iOS device!
+
 ### Compiling source code
-You'll need a Mac and Xcode 11 to run the code. All dependencies except two should already be included in this repo, so all you should have to do is open RPAN.xcworkspace and click the play button to run the app in the simulator! The first excluded dependency is  `GoogleService-Info.plist` that contains API keys that connect to Firestore. The second is `reddift_config.json` which contains the client ID for accessing the Reddit API. If you'd like to run a clone of the app pointed to a different server, you'll have to create these yourself. Otherwise message me to use the ones I use!
+You'll need a Mac and Xcode 11 to run the code. All dependencies except two should already be included in this repo, so all you should have to do is open RPAN.xcworkspace and click the play button to run the app in the simulator! The first excluded dependency is  `GoogleService-Info.plist` that contains API keys that connect to Firestore. The second is `reddift_config.json` which contains the client ID for accessing the Reddit API. If you'd like to run a clone of the app pointed to a different server, you'll have to create these yourself. [Message me](http://reddit.com/user/erikvillegas) if you're serious about compiling and I'd be happy to help!
 
 ### Home screen
 This screen relies on the same API the browser uses to show the top broadcast: https://strapi.reddit.com/broadcasts. This maps to the [Broadcast](https://github.com/erikvillegas/RPAN-iOS/blob/master/RPAN/Models/Broadcast.swift) model, and is used on the home screen to populate all the broadcasts. The networking code for this can be found in [RedditAPI.swift](https://github.com/erikvillegas/RPAN-iOS/blob/master/RPAN/Networking/RedditAPI.swift).
@@ -22,7 +24,8 @@ This screen lets the user update their notification settings for the selected fa
 1. Turning on/off notifications for the broadcaster.
 2. Disabling notifications when the broadcaster streams from specific RPAN subreddits.
 3. Enabling cooldown to avoid excessive notifications from the broadcaster's streams.
-4. Unfavorite the user.
+4. Setting a custom notification tone so the user can instantly know who is streaming without pulling out their phone.
+5. Unfavorite the user.
 
 ![Alt text](https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Notifications.png?raw=true "Notifications")
 
