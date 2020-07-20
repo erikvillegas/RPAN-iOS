@@ -122,7 +122,7 @@ extension NotificationsViewController: UITableViewDataSource {
                 let cell = TitleDetailCell(style: .default, reuseIdentifier: nil)
                 
                 cell.titleLabel.text = "Notification Sound"
-                cell.detailLabel.text = "Default" // todo
+                cell.detailLabel.text = self.userSubscription.soundDisplayName
                 
                 let globalNotificationsOn = UserDefaultsService.shared.bool(forKey: .globalNotificationsOn)
                 cell.titleLabel.alpha = globalNotificationsOn ? 1.0 : 0.5
@@ -199,7 +199,9 @@ extension NotificationsViewController: UITableViewDelegate {
         
         if indexPath.section == 0 {
             if indexPath.row == 1 {
-                self.navigationController?.pushViewController(SoundsViewController(), animated: true)
+                let vc = SoundsViewController(userSubscription: self.userSubscription)
+                vc.delegate = self
+                self.navigationController?.pushViewController(vc, animated: true)
             }
             else if indexPath.row == 2 {
                 guard self.userSubscription.notify else { return }
@@ -230,7 +232,16 @@ extension NotificationsViewController: UITableViewDelegate {
 }
 
 extension NotificationsViewController: SubredditBlacklistViewControllerDelegate {
-    func updatedSubreddits(userSubscription: UserSubscription) {
+    func updatedUserSubscriptionWithBlacklistSetting(userSubscription: UserSubscription) {
+        self.userSubscription = userSubscription
+        self.tableView.reloadData()
+        
+        self.delegate?.updatedUserSubscription(userSubscription: userSubscription)
+    }
+}
+
+extension NotificationsViewController: SoundsViewControllerDelegate {
+    func updatedUserSubscriptionWithSoundSetting(userSubscription: UserSubscription) {
         self.userSubscription = userSubscription
         self.tableView.reloadData()
         

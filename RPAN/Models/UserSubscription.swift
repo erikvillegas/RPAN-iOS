@@ -14,6 +14,7 @@ struct UserSubscription: Codable, Equatable, Hashable {
     let notify: Bool
     let subredditBlacklist: [String]
     let cooldown: Bool
+    let sound: String
     
     static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.username == rhs.username
@@ -26,7 +27,8 @@ struct UserSubscription: Codable, Equatable, Hashable {
             notify: enabled,
             subredditBlacklist:
             self.subredditBlacklist,
-            cooldown: self.cooldown)
+            cooldown: self.cooldown,
+            sound: self.sound)
     }
     
     func withIconUrl(iconUrl: URL?) -> UserSubscription {
@@ -35,7 +37,8 @@ struct UserSubscription: Codable, Equatable, Hashable {
             iconUrl: iconUrl,
             notify: self.notify,
             subredditBlacklist: self.subredditBlacklist,
-            cooldown: self.cooldown)
+            cooldown: self.cooldown,
+            sound: self.sound)
     }
     
     func withSubredditBlacklist(subreddits: [String]) -> UserSubscription {
@@ -44,7 +47,8 @@ struct UserSubscription: Codable, Equatable, Hashable {
             iconUrl: self.iconUrl,
             notify: self.notify,
             subredditBlacklist: subreddits,
-            cooldown: self.cooldown)
+            cooldown: self.cooldown,
+            sound: self.sound)
     }
     
     func withCooldown(enabled: Bool) -> UserSubscription {
@@ -53,6 +57,21 @@ struct UserSubscription: Codable, Equatable, Hashable {
             iconUrl: self.iconUrl,
             notify: self.notify,
             subredditBlacklist: self.subredditBlacklist,
-            cooldown: enabled)
+            cooldown: enabled,
+            sound: self.sound)
+    }
+    
+    func withSound(sound: String) -> UserSubscription {
+        return UserSubscription(
+            username: self.username,
+            iconUrl: self.iconUrl,
+            notify: self.notify,
+            subredditBlacklist: self.subredditBlacklist,
+            cooldown: self.cooldown,
+            sound: sound)
+    }
+    
+    var soundDisplayName: String {
+        return self.sound.components(separatedBy: "-").joined(separator: " ").capitalized
     }
 }

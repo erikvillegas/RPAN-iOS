@@ -72,16 +72,19 @@ class HomeViewController: UIViewController {
         
         self.fetchBroadcasts(loadingMethod: .showIfEmpty(message: "Loading Broadcasts..."))
         
-        self.importFollowers()
-        
         NotificationCenter.default.addObserver(self, selector: #selector(checkForStaleBroadcasts), name: UIApplication.willEnterForegroundNotification, object: nil)
+        
+        // Delay so the "New follower" banner does not conflict with the loading banner
+        DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
+            self.importFollowers()
+        }
         
         AnalyticsService.shared.logScreenView(HomeViewController.self)
     }
     
     @objc func checkForStaleBroadcasts() {
         if Date().timeIntervalSince(self.broadcastsFetchTimestamp) > 60 {
-            self.fetchBroadcasts(loadingMethod: .showImmediately(message: "Loading Broadcasts..."), delay: .milliseconds(1000))
+            self.fetchBroadcasts(loadingMethod: .showImmediately(message: "Refreshing Broadcasts..."), delay: .milliseconds(1000))
         }
     }
     
@@ -174,12 +177,12 @@ class HomeViewController: UIViewController {
                 }
                 
                 if !newUserSubscriptions.isEmpty {
-                    let usernames = newUserSubscriptions.map { $0.username }.joined(separator: ", ")
-                    
                     let view = MessageView.viewFromNib(layout: .statusLine)
 
-                    let plurality = usernames.count == 1 ? "follower" : "followers"
-                    view.configureContent(body: "Imported new \(plurality): \(usernames)")
+                    let usernames = newUserSubscriptions.map { "u/" + $0.username }.joined(separator: ", ")
+                    let plurality = newUserSubscriptions.count == 1 ? "follower" : "followers"
+                    
+                    view.configureContent(body: "Favorited new \(plurality): \(usernames)")
                     view.configureTheme(.success)
                     view.layoutMarginAdditions = .uniform(20)
                     
@@ -212,7 +215,8 @@ class HomeViewController: UIViewController {
                         iconUrl: profile.iconUrl,
                         notify: true,
                         subredditBlacklist: [],
-                        cooldown: false)
+                        cooldown: false,
+                        sound: Constants.DefaultNotificationSoundName)
                     return settingsService.persistFavorite(userSubscription: userSubscription)
                 }.catch { error in
                     CrashService.shared.logError(error, message: "Unable To Favorite")

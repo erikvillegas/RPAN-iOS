@@ -31,7 +31,7 @@ struct Broadcast: Decodable {
         }
         
         struct Author: Decodable {
-            let name: String
+            let name: String?
         }
         
         struct Subreddit: Decodable {
@@ -84,6 +84,6 @@ struct Broadcast: Decodable {
     let stream: Stream
     
     var broadcaster: String {
-        return self.post.authorInfo.name
+        return self.post.authorInfo.name ?? "error"
     }
 }

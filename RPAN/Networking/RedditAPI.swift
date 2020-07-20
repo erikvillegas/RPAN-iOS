@@ -17,10 +17,15 @@ class RedditAPI {
     
     func broadcasts() -> Promise<[Broadcast]> {
 //        return after(.seconds(5)).then {
+        
         return self.attempt(maximumRetryCount: 3) {
             return self.redditAccessToken().then { accessToken -> Promise<[Broadcast]> in
                 let url = self.baseUrl.appendingPathComponent("broadcasts")
                 let request = Session.default.request(url, method: .get, headers: ["Authorization": "Bearer \(accessToken.value)"])
+                
+//                request.responseString { result in
+//                    print(result.value!)
+//                }
                 
                 return request.responseDecodable(type: RedditResponse<[Broadcast]>.self).map { $0.data }
             }

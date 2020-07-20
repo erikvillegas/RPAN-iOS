@@ -54,7 +54,7 @@ class SubredditCell: UITableViewCell {
 }
 
 protocol SubredditBlacklistViewControllerDelegate: class {
-    func updatedSubreddits(userSubscription: UserSubscription)
+    func updatedUserSubscriptionWithBlacklistSetting(userSubscription: UserSubscription)
 }
 
 class SubredditBlacklistViewController: UIViewController {
@@ -137,7 +137,7 @@ class SubredditBlacklistViewController: UIViewController {
         SettingsService.shared.updateSubredditBlacklistSetting(userSubscription: self.userSubscription, subreddits: updatedBlacklist).done { _ in
             let updatedUserSubscription = self.userSubscription.withSubredditBlacklist(subreddits: updatedBlacklist)
             self.userSubscription = updatedUserSubscription
-            self.delegate?.updatedSubreddits(userSubscription: updatedUserSubscription)
+            self.delegate?.updatedUserSubscriptionWithBlacklistSetting(userSubscription: updatedUserSubscription)
         }.catch { error in
             self.displayToast(message: "An expected error occurred, please try again later!", theme: .error)
             CrashService.shared.logError(error, message: "Unable To Toggle Subreddit Blacklist")

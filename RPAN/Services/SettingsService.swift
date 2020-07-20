@@ -289,6 +289,20 @@ class SettingsService {
         }
     }
     
+    func updateNotificationSoundSetting(userSubscription: UserSubscription, sound: String) -> Promise<Void> {
+        guard let userId = UserDefaultsService.shared.string(forKey: .userId) else {
+            return Promise(error: SettingsServiceError.userIdNotFound)
+        }
+
+        let db = Firestore.firestore()
+
+        return self.ensureFirebaseAuth().then { _ -> Promise<Void> in
+            return db.collection("subscriptions").document(self.docId(userSubscription, userId)).setData([
+                "sound": sound
+            ], merge: true)
+        }
+    }
+    
     func updateGlobalNotificationSetting(enabled: Bool) -> Promise<Void> {
         guard let userId = UserDefaultsService.shared.string(forKey: .userId) else {
             return Promise(error: SettingsServiceError.userIdNotFound)

@@ -210,7 +210,7 @@ extension SettingsViewController: UITableViewDataSource {
         case .account:
             return 1
         case .notifications:
-            return self.userSubscriptions.count + 1 // one extra for global notifications cell, and another for sounds
+            return self.userSubscriptions.count + 1 // one extra for global notifications cell
         case .support:
             return 1
         }
@@ -403,6 +403,8 @@ extension SettingsViewController: NotificationsViewControllerDelegate {
         if let index = self.userSubscriptions.firstIndex(of: userSubscription) {
             self.userSubscriptions[Int(index)] = userSubscription
             self.display(userSubscriptions: self.userSubscriptions)
+            
+            SettingsService.shared.savedUserSubscriptions = self.userSubscriptions
         }
     }
 }

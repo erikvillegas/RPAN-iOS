@@ -7,28 +7,12 @@
 //
 
 import UIKit
+import PromiseKit
 import AVFoundation
 
-class NotificationSoundCell: UITableViewCell {
-    let titleLabel = UILabel(labelInit: {
-        $0.font = Fonts.regular.size16
-        $0.textColor = Colors.primaryOrange
-    })
-    
-    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-        super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        self.contentView.addSubview(self.titleLabel)
-        self.titleLabel.centerYToSuperview()
-        self.titleLabel.leftToSuperview(offset: 20)
-        self.titleLabel.rightToSuperview(offset: 12)
-        
-        self.accessoryType = .checkmark
-    }
-    
-    required init?(coder: NSCoder) { fatalError() }
+protocol SoundsViewControllerDelegate: class {
+    func updatedUserSubscriptionWithSoundSetting(userSubscription: UserSubscription)
 }
-
 
 class SoundsViewController: UIViewController {
     let tableView = UITableView([NotificationSoundCell.self], style: .plain, {
@@ -37,14 +21,19 @@ class SoundsViewController: UIViewController {
         $0.backgroundColor = Colors.clear
     })
     
+    var userSubscription: UserSubscription
     let soundNames: [String]
     var selectedRow: Int
+    var delegate: SoundsViewControllerDelegate?
     
-    init() {
-        let resources = try! FileManager.default.contentsOfDirectory(atPath: Bundle.main.resourcePath!)
-        self.soundNames = resources.filter { $0.hasSuffix(".caf") }.map { String($0.dropLast(4)) }
+    init(userSubscription: UserSubscription) {
+        self.userSubscription = userSubscription
         
-        self.selectedRow = 0 // TODO
+        let resources = try! FileManager.default.contentsOfDirectory(atPath: Bundle.main.resourcePath!)
+        self.soundNames = resources.filter { $0.hasSuffix(".caf") }.map { String($0.dropLast(4)) }.sorted()
+        
+        let sound = self.userSubscription.sound == "default" ? "chord" : self.userSubscription.sound
+        self.selectedRow = self.soundNames.firstIndex(of:  sound)!
         
         super.init(nibName: nil, bundle: nil)
     }
@@ -65,6 +54,11 @@ class SoundsViewController: UIViewController {
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
+        
+        let paddedView = UIView()
+        paddedView.frame = CGRect(x: 0, y: 0, width: self.view.bounds.width, height: 28)
+        self.tableView.tableHeaderView = paddedView
+        self.tableView.tableFooterView = paddedView
         
         self.view.addSubview(self.tableView)
         self.tableView.edgesToSuperview()
@@ -99,15 +93,28 @@ extension SoundsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         
+        let sound = self.soundNames[indexPath.row]
+        
+        let previousIndex = self.selectedRow
         self.selectedRow = indexPath.row
         self.tableView.reloadData()
         
-        // TODO: persist the change
-        
-        if let soundURL = Bundle.main.url(forResource: self.soundNames[indexPath.row], withExtension: "caf") {
+        if let soundURL = Bundle.main.url(forResource: sound, withExtension: "caf") {
             var mySound: SystemSoundID = 0
             AudioServicesCreateSystemSoundID(soundURL as CFURL, &mySound)
             AudioServicesPlaySystemSound(mySound)
+        }
+        
+        after(.milliseconds(750)).then {
+            return SettingsService.shared.updateNotificationSoundSetting(userSubscription: self.userSubscription, sound: sound)
+        }.done { _ in
+            let updatedUserSubscription = self.userSubscription.withSound(sound: sound)
+            self.userSubscription = updatedUserSubscription
+            self.delegate?.updatedUserSubscriptionWithSoundSetting(userSubscription: updatedUserSubscription)
+        }.catch { error in
+            self.showSimpleAlert(title: "Oops", message: "There was a problem, please try again later")
+            self.selectedRow = previousIndex
+            self.tableView.reloadData()
         }
     }
 }

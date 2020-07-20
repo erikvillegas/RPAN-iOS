@@ -23,7 +23,8 @@ extension Listing {
                 iconUrl: URL(string: $0.iconImg),
                 notify: notify,
                 subredditBlacklist: [],
-                cooldown: false)
+                cooldown: false,
+                sound: Constants.DefaultNotificationSoundName)
         }
     }
 }
