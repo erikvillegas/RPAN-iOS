@@ -74,7 +74,7 @@ class NotificationsViewController: UIViewController {
             CrashService.shared.logError(error, message: "Unable To Toggle Subscriber Notification")
         }
         
-        self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0), IndexPath(row: 2, section: 0)], with: .automatic)
+        self.tableView.reloadRows(at: [IndexPath(row: 1, section: 0), IndexPath(row: 2, section: 0), IndexPath(row: 3, section: 0)], with: .automatic)
         
         AnalyticsService.shared.logEvent("Broadcaster Notification Switch Toggled", metadata: ["status": notificationsEnabled ? "on" : "off"])
     }
@@ -124,9 +124,9 @@ extension NotificationsViewController: UITableViewDataSource {
                 cell.titleLabel.text = "Notification Sound"
                 cell.detailLabel.text = self.userSubscription.soundDisplayName
                 
-                let globalNotificationsOn = UserDefaultsService.shared.bool(forKey: .globalNotificationsOn)
-                cell.titleLabel.alpha = globalNotificationsOn ? 1.0 : 0.5
-                cell.detailLabel.alpha = globalNotificationsOn ? 1.0 : 0.5
+                cell.selectionStyle = self.userSubscription.notify ? .default : .none
+                cell.titleLabel.alpha = self.userSubscription.notify ? 1.0 : 0.5
+                cell.detailLabel.alpha = self.userSubscription.notify ? 1.0 : 0.5
                 
                 return cell
             case 2:

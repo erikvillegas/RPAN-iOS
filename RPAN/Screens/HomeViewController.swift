@@ -76,7 +76,12 @@ class HomeViewController: UIViewController {
         
         // Delay so the "New follower" banner does not conflict with the loading banner
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
-            self.importFollowers()
+            if LoginService.shared.loggedInUser != nil {
+                self.importFollowers()
+            }
+            else {
+                self.importExistingFavorites()
+            }
         }
         
         AnalyticsService.shared.logScreenView(HomeViewController.self)
@@ -158,40 +163,53 @@ class HomeViewController: UIViewController {
         AnalyticsService.shared.logScreenView(SettingsViewController.self)
     }
     
-    @discardableResult
-    func importFollowers() -> Promise<[UserSubscription]> {
-        guard LoginService.shared.loggedInUser != nil else {
-            return Promise(error: SettingsServiceError.loggedOut)
+    /// If we have no user subscriptions saved locally, check the server if we have any to persist locally
+    func importExistingFavorites() {
+        guard SettingsService.shared.savedUserSubscriptions.isEmpty else {
+            return
         }
         
+        SettingsService.shared.fetchUserSubscriptions().done { userSubscriptions in
+            SettingsService.shared.savedUserSubscriptions = userSubscriptions
+            
+            if !userSubscriptions.isEmpty {
+                self.tableView.reloadData()
+            }
+        }.catch { error in
+            print(error)
+            // todo: log
+        }
+    }
+    
+    func importFollowers() {
         let oldUserSubscriptions = SettingsService.shared.savedUserSubscriptions
         
-        return SettingsService.shared.importUserSubscriptions().tap { result in
-            if case let .fulfilled(userSubscriptions) = result {
-                var newUserSubscriptions = [UserSubscription]()
-                
-                for userSubscription in oldUserSubscriptions.difference(from: userSubscriptions) {
-                    if !oldUserSubscriptions.contains(userSubscription) {
-                        newUserSubscriptions += userSubscription
-                    }
-                }
-                
-                if !newUserSubscriptions.isEmpty {
-                    let view = MessageView.viewFromNib(layout: .statusLine)
-
-                    let usernames = newUserSubscriptions.map { "u/" + $0.username }.joined(separator: ", ")
-                    let plurality = newUserSubscriptions.count == 1 ? "follower" : "followers"
-                    
-                    view.configureContent(body: "Favorited new \(plurality): \(usernames)")
-                    view.configureTheme(.success)
-                    view.layoutMarginAdditions = .uniform(20)
-                    
-                    var config = SwiftMessages.Config()
-                    config.presentationContext = .viewController(self)
-
-                    SwiftMessages.show(config: config, view: view)
+        SettingsService.shared.importUserSubscriptions().done { userSubscriptions in
+            var newUserSubscriptions = [UserSubscription]()
+            
+            for userSubscription in oldUserSubscriptions.difference(from: userSubscriptions) {
+                if !oldUserSubscriptions.contains(userSubscription) {
+                    newUserSubscriptions += userSubscription
                 }
             }
+            
+            if !newUserSubscriptions.isEmpty {
+                let view = MessageView.viewFromNib(layout: .statusLine)
+
+                let usernames = newUserSubscriptions.map { "u/" + $0.username }.joined(separator: ", ")
+                let plurality = newUserSubscriptions.count == 1 ? "follower" : "followers"
+                
+                view.configureContent(body: "Favorited new \(plurality): \(usernames)")
+                view.configureTheme(.success)
+                view.layoutMarginAdditions = .uniform(20)
+                
+                var config = SwiftMessages.Config()
+                config.presentationContext = .viewController(self)
+
+                SwiftMessages.show(config: config, view: view)
+            }
+        }.catch { error in
+            // todo: log
         }
     }
     
@@ -217,7 +235,7 @@ class HomeViewController: UIViewController {
                         subredditBlacklist: [],
                         cooldown: false,
                         sound: Constants.DefaultNotificationSoundName)
-                    return settingsService.persistFavorite(userSubscription: userSubscription)
+                    return settingsService.persistFavorites(userSubscriptions: [userSubscription]).asVoid()
                 }.catch { error in
                     CrashService.shared.logError(error, message: "Unable To Favorite")
                     self.displayToast(message: "Unable to favorite this user, please try again later!", theme: .error)

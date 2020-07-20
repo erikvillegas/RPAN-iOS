@@ -149,14 +149,45 @@ class SettingsService {
     }
     
     func persistFavorites(userSubscriptions: [UserSubscription]) -> Promise<[UserSubscription]> {
+        guard let userId = UserDefaultsService.shared.string(forKey: .userId) else {
+            return Promise(error: SettingsServiceError.userIdNotFound)
+        }
+        
         return self.ensureFirebaseAuth().then { _ -> Promise<[UserSubscription]> in
+            let db = Firestore.firestore()
+            let batch = db.batch()
+            
             // only import subscriptions we don't already have stored locally
             let existingUserSubscriptions = self.savedUserSubscriptions
             let newUserSubscriptions = userSubscriptions.filter { !existingUserSubscriptions.contains($0) }
-            let promises = newUserSubscriptions.map { self.persistFavorite(userSubscription: $0) }
             
-            return when(fulfilled: promises).map {
+            newUserSubscriptions.forEach { userSubscription in
+                let document = db.collection("subscriptions").document(self.docId(userSubscription, userId))
+                batch.setData([
+                    "userId": userId,
+                    "broadcaster": userSubscription.username,
+                    "follower": UserDefaultsService.shared.string(forKey: .username) as Any,
+                    "notify": true,
+                    "iconUrl": userSubscription.iconUrl?.absoluteString as Any
+                ], forDocument: document)
+            }
+            
+            return batch.commit().map {
                 return userSubscriptions
+            }
+        }
+        .tap { result in
+            if case .fulfilled(let savedUserSubscriptions) = result {
+                let existingSavedUserSubscriptions = self.savedUserSubscriptions
+                var newUserSubscriptions = existingSavedUserSubscriptions
+                
+                for savedUserSubscription in savedUserSubscriptions {
+                    if !existingSavedUserSubscriptions.contains(savedUserSubscription) {
+                        newUserSubscriptions += savedUserSubscription
+                    }
+                }
+                
+                self.savedUserSubscriptions = newUserSubscriptions
             }
         }
     }
@@ -172,7 +203,8 @@ class SettingsService {
             "userId": userId,
             "broadcaster": userSubscription.username,
             "follower": UserDefaultsService.shared.string(forKey: .username) as Any,
-            "notify": true
+            "notify": true,
+            "iconUrl": userSubscription.iconUrl?.absoluteString as Any
         ], merge: true).tap { result in
             if case .fulfilled = result {
                 var userSubscriptions = self.savedUserSubscriptions
@@ -211,7 +243,7 @@ class SettingsService {
     
     func fetchUserProfile(username: String) -> Promise<RedditProfile> {
         guard let (_, token) = self.loginService.loggedInUser else {
-            return Promise.value(RedditProfile(username: username, iconUrl: RedditProfile.defaultIcons.randomElement()!))
+            return Promise.value(RedditProfile(username: username, iconUrl: RedditProfile.randomIcon()))
         }
         
         return Promise { seal in
@@ -220,7 +252,7 @@ class SettingsService {
                 try session.getUserProfile(username, completion: { result in
                     switch result {
                     case .success(let account):
-                        let iconUrl = URL(string: account.iconImg) ?? RedditProfile.defaultIcons.randomElement()!
+                        let iconUrl = URL(string: account.iconImg) ?? RedditProfile.randomIcon()
                         seal.fulfill(RedditProfile(username: account.name, iconUrl: iconUrl))
                     case .failure(let error):
                         seal.reject(error)
@@ -323,7 +355,7 @@ class SettingsService {
     func fetchSubreddits() -> Promise<[RpanSubreddit]> {
         return self.ensureFirebaseAuth().then { _ -> Promise<[RpanSubreddit]> in
             let db = Firestore.firestore()
-            return db.collection("subreddits").getDocuments().map { documents in
+            return db.collection("subreddits").getDocumentsFromCollection().map { documents in
                 return documents.compactMap { document in
                     let name = document.data()["name"] as! String
                     let iconUrl = document.data()["iconUrl"] as! String
@@ -351,11 +383,74 @@ class SettingsService {
         return self.ensureFirebaseAuth().then { _ -> Promise<AppConfig> in
             let db = Firestore.firestore()
             
-            return db.collection("config").document("main").getDocument().compactMap { document in
+            return db.collection("config").document("main").getDocumentFromReference().compactMap { document in
                 return document.data()
             }.map { data in
                 return AppConfig(s: data["s"] as? Bool ?? false)
             }
+        }
+    }
+    
+    func fetchUserSubscriptions() -> Promise<[UserSubscription]> {
+        guard let userId = UserDefaultsService.shared.string(forKey: .userId) else {
+            return Promise(error: SettingsServiceError.userIdNotFound)
+        }
+        
+        return self.ensureFirebaseAuth().then { _ -> Promise<[UserSubscription]> in
+            let db = Firestore.firestore()
+            return db.collection("subscriptions")
+                .whereField("userId", isEqualTo: userId)
+                .getDocumentsFromQuery().map { documents in
+                    
+                return documents.compactMap { document in
+                    let broadcaster = document.data()["broadcaster"] as! String
+                    let notify = document.data()["notify"] as? Bool ?? false
+                    let cooldown = document.data()["cooldown"] as? Bool ?? false
+                    let subBlacklist = document.data()["subBlacklist"] as? [String] ?? []
+                    let iconUrl = document.data()["iconUrl"] as? String
+                    let sound = document.data()["sound"] as? String ?? Constants.DefaultNotificationSoundName
+                    return UserSubscription(
+                        username: broadcaster,
+                        iconUrl: URL(string: iconUrl) ?? RedditProfile.randomIcon(),
+                        notify: notify,
+                        subredditBlacklist: subBlacklist,
+                        cooldown: cooldown,
+                        sound: sound)
+                }
+            }
+        }
+    }
+    
+    func persistProfileIcons(userSubscriptions: [UserSubscription]) -> Promise<Void> {
+        guard let userId = UserDefaultsService.shared.string(forKey: .userId) else {
+            return Promise(error: SettingsServiceError.userIdNotFound)
+        }
+        
+        let db = Firestore.firestore()
+        let batch = db.batch()
+        
+        userSubscriptions.filter { $0.iconUrl != nil }.forEach { userSubscription in
+            let document = db.collection("subscriptions").document(self.docId(userSubscription, userId))
+            batch.updateData(["iconUrl": userSubscription.iconUrl!.absoluteString], forDocument: document)
+        }
+        
+        return batch.commit()
+    }
+    
+    func removeAllMyFavorites() -> Promise<Void> {
+        guard let userId = UserDefaultsService.shared.string(forKey: .userId) else {
+            return Promise(error: SettingsServiceError.userIdNotFound)
+        }
+        
+        let db = Firestore.firestore()
+        let batch = db.batch()
+        
+        return db.collection("subscriptions").whereField("userId", isEqualTo: userId).getDocumentsFromQuery().then { result -> Promise<Void> in
+            result.forEach { document in
+                batch.deleteDocument(db.collection("subscriptions").document(document.documentID))
+            }
+            
+            return batch.commit()
         }
     }
 }

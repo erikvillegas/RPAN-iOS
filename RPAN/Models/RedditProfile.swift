@@ -34,4 +34,8 @@ struct RedditProfile {
         URL(string: "https://www.redditstatic.com/avatars/avatar_default_19_7E53C1.png")!,
         URL(string: "https://www.redditstatic.com/avatars/avatar_default_20_FFD635.png")!
     ]
+    
+    static func randomIcon() -> URL {
+        return self.defaultIcons.randomElement()!
+    }
 }

@@ -87,6 +87,8 @@ class SettingsViewController: UIViewController {
         
         SettingsService.shared.importUserSubscriptions().then { userSubscriptions -> Promise<[UserSubscription]> in
             return self.downloadMissingProfilePhotos(userSubscriptions: userSubscriptions)
+        }.then { userSubscriptions in
+            return self.persistProfilePhotos(userSubscriptions: userSubscriptions)
         }.done { userSubscriptions in
             self.display(userSubscriptions: userSubscriptions)
             
@@ -156,6 +158,14 @@ class SettingsViewController: UIViewController {
             }
             
             return updatedUserSubscriptions + userSubscriptionsNotMissingPhotos
+        }
+    }
+    
+    func persistProfilePhotos(userSubscriptions: [UserSubscription]) -> Promise<[UserSubscription]> {
+        return SettingsService.shared.persistProfileIcons(userSubscriptions: userSubscriptions).map {
+            return userSubscriptions
+        }.recover { _ -> Guarantee<[UserSubscription]> in
+            return Guarantee.value(userSubscriptions)
         }
     }
     

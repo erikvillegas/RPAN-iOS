@@ -37,7 +37,7 @@ extension DocumentReference {
         }
     }
     
-    func getDocument() -> Promise<DocumentSnapshot> {
+    func getDocumentFromReference() -> Promise<DocumentSnapshot> {
         return Promise { seal in
             self.getDocument() { snapshot, error in
                 if let snapshot = snapshot {
@@ -52,11 +52,10 @@ extension DocumentReference {
             }
         }
     }
-
 }
 
 extension CollectionReference {
-    func getDocuments() -> Promise<[QueryDocumentSnapshot]> {
+    func getDocumentsFromCollection() -> Promise<[QueryDocumentSnapshot]> {
         return Promise { seal in
             self.getDocuments() { snapshot, error in
                 if let snapshot = snapshot {
@@ -67,6 +66,39 @@ extension CollectionReference {
                 }
                 else {
                     seal.reject(SettingsServiceError.unknown)
+                }
+            }
+        }
+    }
+}
+
+extension Query {
+    func getDocumentsFromQuery() -> Promise<[QueryDocumentSnapshot]> {
+        return Promise { seal in
+            self.getDocuments { snapshot, error in
+                if let snapshot = snapshot {
+                    seal.fulfill(snapshot.documents)
+                }
+                else if let error = error {
+                    seal.reject(error)
+                }
+                else {
+                    seal.reject(SettingsServiceError.unknown)
+                }
+            }
+        }
+    }
+}
+
+extension WriteBatch {
+    func commit() -> Promise<Void> {
+        return Promise { seal in
+            self.commit() { error in
+                if let error = error {
+                    seal.reject(error)
+                }
+                else {
+                    seal.fulfill(())
                 }
             }
         }
