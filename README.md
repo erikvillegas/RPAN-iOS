@@ -14,16 +14,16 @@ You'll need a Mac and Xcode 11 to run the code. All dependencies except two shou
 ### Home screen
 This screen relies on the same API the browser uses to show the top broadcast: https://strapi.reddit.com/broadcasts. This maps to the [Broadcast](https://github.com/erikvillegas/RPAN-iOS/blob/master/RPAN/Models/Broadcast.swift) model, and is used on the home screen to populate all the broadcasts. The networking code for this can be found in [RedditAPI.swift](https://github.com/erikvillegas/RPAN-iOS/blob/master/RPAN/Networking/RedditAPI.swift).
 
-<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Home.png?raw=true" width="30%">
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Home-Dark.png?raw=true" width="30%">
 
 ### Settings screen
 This screen lets the user:
 1. Manage all users they have favorited on the home screen. See "Notifications screen".
 2. Connect their Reddit account so they can import followers into favorites. See "Reddit integration".
 
-<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Settings.png?raw=true" width="30%">
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Settings-Dark.png?raw=true" width="30%">
 
-<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/SettingsLoggedOut.png?raw=true" width="30%">
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/SettingsLoggedOut-Dark.png?raw=true" width="30%">
 
 ### Notifications screen
 This screen lets the user update their notification settings for the selected favorited broadcaster. The options include:
@@ -33,12 +33,12 @@ This screen lets the user update their notification settings for the selected fa
 4. Setting a custom notification tone so the user can instantly know who is streaming without pulling out their phone.
 5. Unfavorite the user.
 
-<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Notifications.png?raw=true" width="30%">
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Notifications-Dark.png?raw=true" width="30%">
 
 ### Subreddit blacklist screen
 All subreddits are enabled by default unless otherwise disabled by the user. Users can disable specific ones here!
 
-<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/SubredditBlacklist.png?raw=true" width="30%">
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/SubredditBlacklist-Dark.png?raw=true" width="30%">
 
 ### Reddit Integration
 I created a Reddit "app" [here](https://old.reddit.com/prefs/apps/) that allows the iOS app to get an authorized access token for a user that grants access to their data. The code that initiates the login flow is in [LoginService.swift](https://github.com/erikvillegas/RPAN-iOS/blob/master/RPAN/Services/LoginService.swift). Scopes currently used are "identity", "mysubreddits", and "read".
