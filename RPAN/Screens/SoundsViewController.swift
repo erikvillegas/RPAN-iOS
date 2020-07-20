@@ -62,6 +62,8 @@ class SoundsViewController: UIViewController {
         
         self.view.addSubview(self.tableView)
         self.tableView.edgesToSuperview()
+        
+        AnalyticsService.shared.logScreenView(HomeViewController.self)
     }
 }
 
@@ -116,5 +118,7 @@ extension SoundsViewController: UITableViewDelegate {
             self.selectedRow = previousIndex
             self.tableView.reloadData()
         }
+        
+        AnalyticsService.shared.logEvent("Sound Selected", metadata: ["name": sound])
     }
 }

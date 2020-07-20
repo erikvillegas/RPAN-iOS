@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseCrashlytics
 
 protocol NotificationsViewControllerDelegate: class {
     func updatedUserSubscription(userSubscription: UserSubscription)
@@ -199,6 +200,7 @@ extension NotificationsViewController: UITableViewDelegate {
         
         if indexPath.section == 0 {
             if indexPath.row == 1 {
+                guard self.userSubscription.notify else { return }
                 let vc = SoundsViewController(userSubscription: self.userSubscription)
                 vc.delegate = self
                 self.navigationController?.pushViewController(vc, animated: true)

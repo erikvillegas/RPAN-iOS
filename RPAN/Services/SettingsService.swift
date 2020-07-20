@@ -28,8 +28,8 @@ class SettingsService {
     }
     
     @discardableResult
-    func createUser() -> Promise<Void> {
-        return self.ensureFirebaseAuth().then { userId -> Promise<Void> in
+    func createUser() -> Promise<String> {
+        return self.ensureFirebaseAuth().then { userId -> Promise<String> in
             UserDefaultsService.shared.set(userId, forKey: .userId)
             CrashService.shared.setUserId(userId)
             
@@ -37,7 +37,10 @@ class SettingsService {
             return db.collection("users").document(userId).setData([
                 "userId": userId,
                 "simulator": Device.isSimulator()
-            ], merge: true)
+                ], merge: true)
+            .map {
+                return userId
+            }
         }
     }
     

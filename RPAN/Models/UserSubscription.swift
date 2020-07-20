@@ -20,6 +20,10 @@ struct UserSubscription: Codable, Equatable, Hashable {
         return lhs.username == rhs.username
     }
     
+//    func hash(into hasher: inout Hasher) {
+//        fatal
+//    }
+    
     func withNotifications(enabled: Bool) -> UserSubscription {
         return UserSubscription(
             username: self.username,

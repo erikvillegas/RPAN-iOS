@@ -342,6 +342,9 @@ PODS:
   - leveldb-library (1.22)
   - LNParallaxTVCell (1.0.0)
   - MiniKeychain (1.0.8)
+  - Mixpanel-swift (2.7.6):
+    - Mixpanel-swift/Complete (= 2.7.6)
+  - Mixpanel-swift/Complete (2.7.6)
   - nanopb (1.30905.0):
     - nanopb/decode (= 1.30905.0)
     - nanopb/encode (= 1.30905.0)
@@ -388,6 +391,7 @@ DEPENDENCIES:
   - KeychainSwift (= 19.0.0)
   - Kingfisher (= 5.14.1)
   - LNParallaxTVCell
+  - Mixpanel-swift
   - NVActivityIndicatorView (= 5.0.0)
   - PromiseKit (= 6.13.1)
   - reddift (from `https://github.com/erikvillegas/reddift`, branch `master`)
@@ -426,6 +430,7 @@ SPEC REPOS:
     - leveldb-library
     - LNParallaxTVCell
     - MiniKeychain
+    - Mixpanel-swift
     - nanopb
     - NVActivityIndicatorView
     - PromiseKit
@@ -476,6 +481,7 @@ SPEC CHECKSUMS:
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   LNParallaxTVCell: 6fc8a33802f8098816cdfc3fe5ce37a4bbc5619c
   MiniKeychain: 5d424fcd50fb8ab4cc946db2c3415dc391ffffdc
+  Mixpanel-swift: 4950d554c4b28d2f594556f3641499ff495b6b5f
   nanopb: c43f40fadfe79e8b8db116583945847910cbabc9
   NVActivityIndicatorView: f109ed069924ac1b4adbc1ae9cfaeac0be1d6c2c
   PromiseKit: 28fda91c973cc377875d8c0ea4f973013c05b6db
@@ -489,6 +495,6 @@ SPEC CHECKSUMS:
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: 43ccf5275e162cd4043df7d46137a44fa3e9adcf
+PODFILE CHECKSUM: 0e4597ec533be1bbd6091fee872c9a250eaa4ac2
 
 COCOAPODS: 1.9.3

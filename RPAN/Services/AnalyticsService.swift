@@ -8,31 +8,38 @@
 
 import UIKit
 import Foundation
-//import FirebaseAnalytics
+import Mixpanel
 
 final class AnalyticsService {
     static let shared = AnalyticsService()
     
     var userId: String {
-        return UserDefaultsService.shared.string(forKey: .userId) ?? "N/A"
+        get {
+            return UserDefaultsService.shared.string(forKey: .userId) ?? "N/A"
+        }
+        set {
+            Mixpanel.mainInstance().identify(distinctId: newValue)
+            Mixpanel.mainInstance().registerSuperProperties(["UserId": newValue])
+        }
     }
     
     var username: String {
-        return UserDefaultsService.shared.string(forKey: .username) ?? "N/A"
+        get {
+            return UserDefaultsService.shared.string(forKey: .username) ?? "N/A"
+        }
+        set {
+            Mixpanel.mainInstance().registerSuperProperties(["Username": newValue])
+        }
     }
     
     func logEvent(_ name: String, metadata: [String: String] = [:]) {
-        var parameters = [
-            "username": self.username as NSObject,
-            "userId": self.userId as NSObject
-        ]
+        var parameters = [String: String]()
         
         for (key, value) in metadata {
-            parameters[key] = value as NSObject
+            parameters[key] = value
         }
         
-        // Commenting out while we figure out why I can't archive the app with this library included
-        //Analytics.logEvent(name, parameters: parameters)
+        Mixpanel.mainInstance().track(event: name, properties: parameters)
     }
     
     func logScreenView(_ controller: UIViewController.Type) {

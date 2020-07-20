@@ -64,6 +64,7 @@ class LoginService {
                         }
                         
                         SettingsService.shared.associateUsernameToCurrentUser(account.name)
+                        AnalyticsService.shared.username = account.name
                         
                         UserDefaultsService.shared.setCodableObject(user, forKey: .currentUser)
                         seal.fulfill(user)

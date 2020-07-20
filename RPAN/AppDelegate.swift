@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import FirebaseMessaging
+import Mixpanel
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
@@ -42,11 +43,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
             self.window?.makeKeyAndVisible()
         }
         
+        Mixpanel.initialize(token: "ed57eac8d8ec3f661d8fe52cd96c196b")
+        
         FirebaseApp.configure()
         Messaging.messaging().delegate = self
         UNUserNotificationCenter.current().delegate = self
         
-        SettingsService.shared.createUser()
+        SettingsService.shared.createUser().done { userId in
+            AnalyticsService.shared.userId = userId
+        }.cauterize()
         
         SettingsService.shared.fetchAppConfiguration().done { config in
             UserDefaultsService.shared.setCodableObject(config, forKey: .appConfig)
