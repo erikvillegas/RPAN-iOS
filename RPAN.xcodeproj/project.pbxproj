@@ -95,6 +95,7 @@
 		15B7640D24C49BB400D25092 /* SoundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B7640C24C49BB400D25092 /* SoundsViewController.swift */; };
 		15B7640F24C5128800D25092 /* NotificationSoundCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B7640E24C5128800D25092 /* NotificationSoundCell.swift */; };
 		15B7641124C5129D00D25092 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B7641024C5129D00D25092 /* Constants.swift */; };
+		15B7641324C5A5C900D25092 /* SubredditCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15B7641224C5A5C900D25092 /* SubredditCell.swift */; };
 		15EBF8C724BC6462009E4C7C /* SubredditBlacklistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15EBF8C624BC6462009E4C7C /* SubredditBlacklistViewController.swift */; };
 		15F4803024BDCCE200EFC323 /* CrashService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F4802F24BDCCE200EFC323 /* CrashService.swift */; };
 		15F4803224BDD12800EFC323 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15F4803124BDD12800EFC323 /* AnalyticsService.swift */; };
@@ -221,6 +222,7 @@
 		15B7640C24C49BB400D25092 /* SoundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SoundsViewController.swift; sourceTree = "<group>"; };
 		15B7640E24C5128800D25092 /* NotificationSoundCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSoundCell.swift; sourceTree = "<group>"; };
 		15B7641024C5129D00D25092 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		15B7641224C5A5C900D25092 /* SubredditCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubredditCell.swift; sourceTree = "<group>"; };
 		15EBF8C624BC6462009E4C7C /* SubredditBlacklistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubredditBlacklistViewController.swift; sourceTree = "<group>"; };
 		15F4802F24BDCCE200EFC323 /* CrashService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CrashService.swift; sourceTree = "<group>"; };
 		15F4803124BDD12800EFC323 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
@@ -437,6 +439,7 @@
 				158F263624C0BA7A0007CE60 /* TitleDetailCell.swift */,
 				158F263824C0BA9B0007CE60 /* NotificationSettingCell.swift */,
 				15B7640E24C5128800D25092 /* NotificationSoundCell.swift */,
+				15B7641224C5A5C900D25092 /* SubredditCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -741,6 +744,7 @@
 				158F263324C0BA430007CE60 /* UserSubscriptionCell.swift in Sources */,
 				15EBF8C724BC6462009E4C7C /* SubredditBlacklistViewController.swift in Sources */,
 				15F4803024BDCCE200EFC323 /* CrashService.swift in Sources */,
+				15B7641324C5A5C900D25092 /* SubredditCell.swift in Sources */,
 				151CF87424BA14A400C4C3D8 /* PushService.swift in Sources */,
 				151CF88624BA877100C4C3D8 /* NotificationsViewController.swift in Sources */,
 				151CF86224B5F00A00C4C3D8 /* Fonts.swift in Sources */,

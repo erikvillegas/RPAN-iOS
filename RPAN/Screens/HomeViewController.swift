@@ -349,7 +349,7 @@ extension HomeViewController: UITableViewDelegate {
         AnalyticsService.shared.logEvent("Open Broadcast - Enabled")
         
         let broadcast = self.broadcasts[indexPath.row]
-        UIApplication.shared.open(broadcast.post.url, options: [UIApplication.OpenExternalURLOptionsKey.universalLinksOnly : true]) { success in
+        UIApplication.shared.open(broadcast.post.url) { success in
             if !success {
                 let message = "Install the Reddit app from the App Store to view this broadcast!"
                 self.showCustomActionAlert(title: "Reddit App Required", message: message, actionTitle: "Install") { _ in
