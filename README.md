@@ -21,9 +21,9 @@ This screen lets the user:
 1. Manage all users they have favorited on the home screen. See "Notifications screen".
 2. Connect their Reddit account so they can import followers into favorites. See "Reddit integration".
 
-![Alt text](https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Settings.png?raw=true "Settings")
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Settings.png?raw=true" width="30%">
 
-![Alt text](https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/SettingsLoggedOut.png?raw=true "SettingsLoggedOut")
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/SettingsLoggedOut.png?raw=true" width="30%">
 
 ### Notifications screen
 This screen lets the user update their notification settings for the selected favorited broadcaster. The options include:
@@ -33,12 +33,12 @@ This screen lets the user update their notification settings for the selected fa
 4. Setting a custom notification tone so the user can instantly know who is streaming without pulling out their phone.
 5. Unfavorite the user.
 
-![Alt text](https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Notifications.png?raw=true "Notifications")
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/Notifications.png?raw=true" width="30%">
 
 ### Subreddit blacklist screen
 All subreddits are enabled by default unless otherwise disabled by the user. Users can disable specific ones here!
 
-![Alt text](https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/SubredditBlacklist.png?raw=true "Subreddit Blacklist")
+<img src="https://github.com/erikvillegas/RPAN-iOS/blob/master/Screenshots/SubredditBlacklist.png?raw=true" width="30%">
 
 ### Reddit Integration
 I created a Reddit "app" [here](https://old.reddit.com/prefs/apps/) that allows the iOS app to get an authorized access token for a user that grants access to their data. The code that initiates the login flow is in [LoginService.swift](https://github.com/erikvillegas/RPAN-iOS/blob/master/RPAN/Services/LoginService.swift). Scopes currently used are "identity", "mysubreddits", and "read".
