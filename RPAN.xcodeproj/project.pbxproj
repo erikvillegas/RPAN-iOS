@@ -44,8 +44,9 @@
 		152062B724B5238900D47F2E /* CustomJSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152062B524B5238900D47F2E /* CustomJSONDecoder.swift */; };
 		152062B924B523F900D47F2E /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 152062B824B523F900D47F2E /* Podfile */; };
 		152062BB24B527E400D47F2E /* UIView+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152062BA24B527E400D47F2E /* UIView+Extensions.swift */; };
-		152062C224B52BDE00D47F2E /* RedditAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152062C124B52BDE00D47F2E /* RedditAPI.swift */; };
+		152062C224B52BDE00D47F2E /* Strapi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152062C124B52BDE00D47F2E /* Strapi.swift */; };
 		152062C424B5969700D47F2E /* ModelSerialization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 152062C324B5969700D47F2E /* ModelSerialization.swift */; };
+		15641D6E24CADD5900232E70 /* BroadcastModerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15641D6D24CADD5900232E70 /* BroadcastModerationViewController.swift */; };
 		158F262824C0B8CF0007CE60 /* BroadcastCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F262724C0B8CF0007CE60 /* BroadcastCell.swift */; };
 		158F262D24C0BA000007CE60 /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F262C24C0BA000007CE60 /* UIViewController+Extensions.swift */; };
 		158F262F24C0BA190007CE60 /* ActionButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F262E24C0BA190007CE60 /* ActionButtonCell.swift */; };
@@ -171,8 +172,9 @@
 		152062B824B523F900D47F2E /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		152062BA24B527E400D47F2E /* UIView+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Extensions.swift"; sourceTree = "<group>"; };
 		152062C024B528B000D47F2E /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
-		152062C124B52BDE00D47F2E /* RedditAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditAPI.swift; sourceTree = "<group>"; };
+		152062C124B52BDE00D47F2E /* Strapi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Strapi.swift; sourceTree = "<group>"; };
 		152062C324B5969700D47F2E /* ModelSerialization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSerialization.swift; sourceTree = "<group>"; };
+		15641D6D24CADD5900232E70 /* BroadcastModerationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastModerationViewController.swift; sourceTree = "<group>"; };
 		158F262724C0B8CF0007CE60 /* BroadcastCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastCell.swift; sourceTree = "<group>"; };
 		158F262C24C0BA000007CE60 /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		158F262E24C0BA190007CE60 /* ActionButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionButtonCell.swift; sourceTree = "<group>"; };
@@ -340,7 +342,7 @@
 		1520628C24B51FF800D47F2E /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				152062C124B52BDE00D47F2E /* RedditAPI.swift */,
+				152062C124B52BDE00D47F2E /* Strapi.swift */,
 				152062C324B5969700D47F2E /* ModelSerialization.swift */,
 				158F264E24C0BCEB0007CE60 /* RedditResponse.swift */,
 				158F265224C0BD0E0007CE60 /* RedditAPIError.swift */,
@@ -357,6 +359,7 @@
 				151CF88524BA877100C4C3D8 /* NotificationsViewController.swift */,
 				15EBF8C624BC6462009E4C7C /* SubredditBlacklistViewController.swift */,
 				15B7640C24C49BB400D25092 /* SoundsViewController.swift */,
+				15641D6D24CADD5900232E70 /* BroadcastModerationViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -726,7 +729,7 @@
 				158F264D24C0BC650007CE60 /* Firestore+Extensions.swift in Sources */,
 				152062A924B5224B00D47F2E /* UIColor+Extensions.swift in Sources */,
 				158F263924C0BA9B0007CE60 /* NotificationSettingCell.swift in Sources */,
-				152062C224B52BDE00D47F2E /* RedditAPI.swift in Sources */,
+				152062C224B52BDE00D47F2E /* Strapi.swift in Sources */,
 				152062A724B5223100D47F2E /* String+NumberFormatting.swift in Sources */,
 				152062A124B521BD00D47F2E /* Int+Extensions.swift in Sources */,
 				158F262D24C0BA000007CE60 /* UIViewController+Extensions.swift in Sources */,
@@ -744,6 +747,7 @@
 				158F263324C0BA430007CE60 /* UserSubscriptionCell.swift in Sources */,
 				15EBF8C724BC6462009E4C7C /* SubredditBlacklistViewController.swift in Sources */,
 				15F4803024BDCCE200EFC323 /* CrashService.swift in Sources */,
+				15641D6E24CADD5900232E70 /* BroadcastModerationViewController.swift in Sources */,
 				15B7641324C5A5C900D25092 /* SubredditCell.swift in Sources */,
 				151CF87424BA14A400C4C3D8 /* PushService.swift in Sources */,
 				151CF88624BA877100C4C3D8 /* NotificationsViewController.swift in Sources */,

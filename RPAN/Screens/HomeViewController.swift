@@ -73,6 +73,7 @@ class HomeViewController: UIViewController {
         self.fetchBroadcasts(loadingMethod: .showIfEmpty(message: "Loading Broadcasts..."))
         
         NotificationCenter.default.addObserver(self, selector: #selector(checkForStaleBroadcasts), name: UIApplication.willEnterForegroundNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(checkForRpanLink), name: UIApplication.willEnterForegroundNotification, object: nil)
         
         // Delay so the "New follower" banner does not conflict with the loading banner
         DispatchQueue.main.asyncAfter(deadline: .now() + 4.0) {
@@ -84,12 +85,30 @@ class HomeViewController: UIViewController {
             }
         }
         
+        self.checkForRpanLink()
+        
         AnalyticsService.shared.logScreenView(HomeViewController.self)
     }
     
     @objc func checkForStaleBroadcasts() {
         if Date().timeIntervalSince(self.broadcastsFetchTimestamp) > 60 {
             self.fetchBroadcasts(loadingMethod: .showImmediately(message: "Refreshing Broadcasts..."), delay: .milliseconds(1000))
+        }
+    }
+    
+    @objc func checkForRpanLink() {
+        if let pasteboard = UIPasteboard.general.string, pasteboard.hasPrefix("https://www.reddit.com/rpan/r/"), let url = URL(string: pasteboard) {
+            let message = "Would you like to open mod tools for this stream?"
+            self.showCustomActionsAlert(title: "RPAN Link Detected", message: message, actionTitle: "Yes!", cancelTitle: "No Thanks", actionHandler: { _ in
+                Strapi.shared.broadcast(id: url.lastPathComponent).done { broadcast in
+                    let broadcastModerationVC = UINavigationController(rootViewController: BroadcastModerationViewController(broadcast: broadcast))
+                    self.present(broadcastModerationVC, animated: true, completion: nil)
+                }.catch { error in
+                    self.showSimpleAlert(title: "Oops", message: "Unable to load this broadcast, please let me know the URL that you copied.")
+                }
+            }, cancelHandler: { _ in
+                UIPasteboard.general.string = nil
+            })
         }
     }
     
@@ -106,7 +125,7 @@ class HomeViewController: UIViewController {
         }
         
         after(delay).then {
-            return RedditAPI.shared.broadcasts()
+            return Strapi.shared.broadcasts()
         }.done { broadcasts in
             self.broadcasts = broadcasts
             self.displayBroadcasts()

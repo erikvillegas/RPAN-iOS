@@ -1,5 +1,5 @@
 //
-//  RedditAPI.swift
+//  Strapi.swift
 //  RPAN
 //
 //  Created by Erik Villegas on 7/7/20.
