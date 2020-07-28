@@ -11,11 +11,11 @@ import Foundation
 /**
 Object to eliminate codes to parse http response object.
 */
-struct Response {
-    let data: Data
-    let statusCode: Int
+public struct Response {
+    public let data: Data
+    public let statusCode: Int
     
-    init(data: Data?, urlResponse: URLResponse?) {
+    public init(data: Data?, urlResponse: URLResponse?) {
         if let data = data {
             self.data = data
         } else {

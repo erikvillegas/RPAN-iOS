@@ -377,6 +377,7 @@ PODS:
   - SwiftMessages (7.0.1):
     - SwiftMessages/App (= 7.0.1)
   - SwiftMessages/App (7.0.1)
+  - SwipeCellKit (2.5.2)
   - TinyConstraints (4.0.1)
 
 DEPENDENCIES:
@@ -399,6 +400,7 @@ DEPENDENCIES:
   - RxSwift (= 5.1.1)
   - SwiftDate (= 6.1.0)
   - SwiftMessages (= 7.0.1)
+  - SwipeCellKit (= 2.5.2)
   - TinyConstraints (= 4.0.1)
 
 SPEC REPOS:
@@ -441,6 +443,7 @@ SPEC REPOS:
     - RxSwift
     - SwiftDate
     - SwiftMessages
+    - SwipeCellKit
     - TinyConstraints
 
 EXTERNAL SOURCES:
@@ -450,7 +453,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   reddift:
-    :commit: 1508584a76852f35fdf2343bcf54522715b9fbe2
+    :commit: d3d2f5a0f5db9dde24a18210524aa6b5f61ea89a
     :git: https://github.com/erikvillegas/reddift
 
 SPEC CHECKSUMS:
@@ -493,8 +496,9 @@ SPEC CHECKSUMS:
   RxSwift: 81470a2074fa8780320ea5fe4102807cb7118178
   SwiftDate: fa2bb3962056bb44047b4b85a30044e5eae30b03
   SwiftMessages: b577dc7043be8b299857ab35bb663dbff6483bd0
+  SwipeCellKit: a19e328c69c4ba983f317eeabf36ed299c69bfa4
   TinyConstraints: 8dd91295e56797648c7bc335dd20e1d91ec4c192
 
-PODFILE CHECKSUM: 535d917f65d09f7342150d39cb248fb3138b3e1a
+PODFILE CHECKSUM: b3371930c410531191b2ef0ad91c89bcf6bd07c3
 
 COCOAPODS: 1.9.3

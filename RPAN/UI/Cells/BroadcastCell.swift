@@ -156,8 +156,13 @@ class BroadcastCell: UITableViewCell {
         self.subredditMaskView.addSubview(self.subredditImageView)
         self.subredditImageView.edgesToSuperview()
         
-        let totalTimeGranted = broadcast.broadcastTime + broadcast.estimatedRemainingTime
-        self.timeIndicatorWidthConstraint?.constant = CGFloat(broadcast.broadcastTime/totalTimeGranted) * Constants.thumbnailWidth
+        switch broadcast.stream.state {
+        case .live:
+            let totalTimeGranted = broadcast.broadcastTime + broadcast.estimatedRemainingTime
+            self.timeIndicatorWidthConstraint?.constant = CGFloat(broadcast.broadcastTime/totalTimeGranted) * Constants.thumbnailWidth
+        case .ended:
+            self.timeIndicatorWidthConstraint?.constant = Constants.thumbnailWidth
+        }
         
         let userSubscriptions = SettingsService.shared.savedUserSubscriptions
         self.subscribeButton.isSelected = SettingsService.shared.isSubscribedTo(username: broadcast.broadcaster, fromUserSubscriptions: userSubscriptions)

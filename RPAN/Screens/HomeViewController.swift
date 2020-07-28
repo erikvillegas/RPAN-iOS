@@ -97,6 +97,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func checkForRpanLink() {
+        //UIPasteboard.general.string = "https://www.reddit.com/rpan/r/distantsocializing/hyav28"
         if let pasteboard = UIPasteboard.general.string, pasteboard.hasPrefix("https://www.reddit.com/rpan/r/"), let url = URL(string: pasteboard) {
             let message = "Would you like to open mod tools for this stream?"
             self.showCustomActionsAlert(title: "RPAN Link Detected", message: message, actionTitle: "Yes!", cancelTitle: "No Thanks", actionHandler: { _ in
@@ -107,7 +108,7 @@ class HomeViewController: UIViewController {
                     self.showSimpleAlert(title: "Oops", message: "Unable to load this broadcast, please let me know the URL that you copied.")
                 }
             }, cancelHandler: { _ in
-                UIPasteboard.general.string = nil
+                UIPasteboard.general.string = ""
             })
         }
     }
@@ -379,6 +380,17 @@ extension HomeViewController: UITableViewDelegate {
                 AnalyticsService.shared.logEvent("Reddit Not Installed")
             }
         }
+    }
+    
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let modAction = UITableViewRowAction(style: .normal, title: "Mod") { action, index in
+            let broadcast = self.broadcasts[indexPath.row]
+            let broadcastModerationVC = UINavigationController(rootViewController: BroadcastModerationViewController(broadcast: broadcast))
+            self.present(broadcastModerationVC, animated: true, completion: nil)
+        }
+        modAction.backgroundColor = Colors.primaryGreen
+
+        return [modAction]
     }
 }
 

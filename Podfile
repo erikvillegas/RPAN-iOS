@@ -24,6 +24,7 @@ target 'RPAN' do
   pod 'FirebaseFirestoreSwift'
   pod 'Firebase/Messaging'
   pod 'Firebase/Crashlytics'
+  pod 'SwipeCellKit', '2.5.2'
 
   pod 'Mixpanel-swift'
   #pod 'SVProgressHUD', git: 'https://github.com/Sipeso/SVProgressHUD', branch: 'master'

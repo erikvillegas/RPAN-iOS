@@ -169,6 +169,10 @@ public struct Comment: Thing, Created, Votable {
     */
     public let ups: Int
     
+    public let authorFullname: String
+    
+    public let removed: Bool
+    
     /**
 	   if the comment is stickied
    	*/
@@ -221,6 +225,8 @@ public struct Comment: Thing, Created, Votable {
         numReports = 0
         ups = 0
         stickied = false
+        authorFullname = ""
+        removed = false
     }
     
     public init(link: Link) {
@@ -256,7 +262,9 @@ public struct Comment: Thing, Created, Votable {
         modReports = link.modReports
         numReports = link.numReports
         ups = link.ups
-	stickied = false
+        authorFullname = ""
+        removed = false
+        stickied = false
     }
     
     /**
@@ -297,6 +305,7 @@ public struct Comment: Thing, Created, Votable {
         created = data["created"] as? Int ?? 0
         authorFlairText = data["author_flair_text"] as? String ?? ""
         createdUtc = data["created_utc"] as? Int ?? 0
+        authorFullname = data["author_fullname"] as? String ?? ""
         
         if let distinguishedString = data["distinguished"] as? String {
             switch distinguishedString {
@@ -322,5 +331,7 @@ public struct Comment: Thing, Created, Votable {
         } else {
             replies = Listing()
         }
+        
+        removed = data["removed"] as? Bool ?? false
     }
 }

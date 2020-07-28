@@ -11,6 +11,9 @@ import UIKit
 struct Colors {
     /// #FF4500
     static let primaryOrange = #colorLiteral(red: 1, green: 0.2705882353, blue: 0, alpha: 1)
+    
+    /// #00E018
+    static let primaryGreen = #colorLiteral(red: 0, green: 0.8784313725, blue: 0.09411764706, alpha: 1)
 
     /// #202125
     static var reallyDarkGray = #colorLiteral(red: 0.1254901961, green: 0.1294117647, blue: 0.1450980392, alpha: 1)

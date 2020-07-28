@@ -10,4 +10,5 @@ import Foundation
 
 enum RedditAPIError: Error {
     case noAccessTokenFound
+    case noDataFound
 }

@@ -25,7 +25,7 @@ public class Session: NSObject, URLSessionDelegate, URLSessionDataDelegate {
     /// Token object to access via OAuth
     public var token: Token?
     /// Base URL for OAuth API
-    let baseURL: String
+    public let baseURL: String
     /// Session object to communicate a server
     var session = URLSession(configuration: URLSessionConfiguration.default)
     
@@ -65,7 +65,7 @@ public class Session: NSObject, URLSessionDelegate, URLSessionDataDelegate {
 
 	- parameter response: NSURLResponse object is passed from NSURLSession.
 	*/
-    func updateRateLimit(with response: URLResponse?, verbose: Bool = false) {
+    public func updateRateLimit(with response: URLResponse?, verbose: Bool = false) {
         if let httpResponse = response as? HTTPURLResponse {
             if let temp = httpResponse.allHeaderFields["x-ratelimit-reset"] as? String {
                 rateLimitDurationToReset = Double(temp) ?? 0
@@ -84,7 +84,7 @@ public class Session: NSObject, URLSessionDelegate, URLSessionDataDelegate {
         }
     }
     
-    func handleResponse2RedditAny(_ data: Data?, response: URLResponse?, error: NSError?) -> Result<RedditAny> {
+    public func handleResponse2RedditAny(_ data: Data?, response: URLResponse?, error: NSError?) -> Result<RedditAny> {
         self.updateRateLimit(with: response)
         return Result(from: Response(data: data, urlResponse: response), optional: error)
             .flatMap(response2Data)
@@ -92,7 +92,7 @@ public class Session: NSObject, URLSessionDelegate, URLSessionDataDelegate {
             .flatMap(json2RedditAny)
     }
     
-    func handleResponse2JSON(_ data: Data?, response: URLResponse?, error: NSError?) -> Result<JSONAny> {
+    public func handleResponse2JSON(_ data: Data?, response: URLResponse?, error: NSError?) -> Result<JSONAny> {
         self.updateRateLimit(with: response)
         return Result(from: Response(data: data, urlResponse: response), optional: error)
             .flatMap(response2Data)
@@ -106,7 +106,7 @@ public class Session: NSObject, URLSessionDelegate, URLSessionDataDelegate {
      - parameter handleResponse: Closure returns Result<T> object by handling response, data and error that is returned from NSURLSession.
      - parameter completion: The completion handler to call when the load request is complete.
      */
-    func executeTaskAgainAfterRefresh<T>(_ request: URLRequest, handleResponse: @escaping (_ data: Data?, _ response: URLResponse?, _ error: NSError?) -> Result<T>, completion: @escaping (Result<T>) -> Void) {
+    public func executeTaskAgainAfterRefresh<T>(_ request: URLRequest, handleResponse: @escaping (_ data: Data?, _ response: URLResponse?, _ error: NSError?) -> Result<T>, completion: @escaping (Result<T>) -> Void) {
         do {
             try self.refreshToken({ (result) -> Void in
                 switch result {
@@ -135,7 +135,7 @@ public class Session: NSObject, URLSessionDelegate, URLSessionDataDelegate {
      - parameter completion: The completion handler to call when the load request is complete.
      - returns: Data task which requests search to reddit.com.
      */
-    func executeTask<T>(_ request: URLRequest, handleResponse: @escaping ((_ data: Data?, _ response: URLResponse?, _ error: NSError?) -> Result<T>), completion: @escaping ((Result<T>) -> Void)) -> URLSessionDataTask {
+    public func executeTask<T>(_ request: URLRequest, handleResponse: @escaping ((_ data: Data?, _ response: URLResponse?, _ error: NSError?) -> Result<T>), completion: @escaping ((Result<T>) -> Void)) -> URLSessionDataTask {
         let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: Error?) -> Void in
             self.updateRateLimit(with: response)
             let result = handleResponse(data, response, error as NSError?)

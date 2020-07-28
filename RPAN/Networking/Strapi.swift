@@ -40,7 +40,7 @@ class Strapi {
                 let request = Session.default.request(url, method: .get, headers: ["Authorization": "Bearer \(accessToken.value)"])
                 
                 request.responseString { result in
-                    print(result.value!)
+                    print(result.value)
                 }
                 
                 return request.responseDecodable(type: RedditResponse<Broadcast>.self).map { $0.data }
