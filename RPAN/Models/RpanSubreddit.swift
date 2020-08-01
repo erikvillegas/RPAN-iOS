@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct RpanSubreddit: Decodable {
+struct RpanSubreddit: Codable {
     let name: String
     let iconUrl: URL
 }

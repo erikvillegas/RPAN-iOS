@@ -97,15 +97,23 @@ class HomeViewController: UIViewController {
     }
     
     @objc func checkForRpanLink() {
-        //UIPasteboard.general.string = "https://www.reddit.com/rpan/r/distantsocializing/hyav28"
+        guard SettingsService.shared.isRpanMod() else { return }
+        
+        //UIPasteboard.general.string = "https://www.reddit.com/rpan/r/TheYouShow/hz499b"
         if let pasteboard = UIPasteboard.general.string, pasteboard.hasPrefix("https://www.reddit.com/rpan/r/"), let url = URL(string: pasteboard) {
-            let message = "Would you like to open mod tools for this stream?"
+            let subreddit = url.absoluteString.matchRegexSingle("r/(\\w+)") ?? ""
+            var message = "Would you like to open mod tools for this stream?"
+            
+            if !SettingsService.shared.isRpanMod(for: subreddit) {
+                message += "\n\nYou aren't a mod of r/\(subreddit), some actions may not work as expected."
+            }
+            
             self.showCustomActionsAlert(title: "RPAN Link Detected", message: message, actionTitle: "Yes!", cancelTitle: "No Thanks", actionHandler: { _ in
                 Strapi.shared.broadcast(id: url.lastPathComponent).done { broadcast in
                     let broadcastModerationVC = UINavigationController(rootViewController: BroadcastModerationViewController(broadcast: broadcast))
                     self.present(broadcastModerationVC, animated: true, completion: nil)
                 }.catch { error in
-                    self.showSimpleAlert(title: "Oops", message: "Unable to load this broadcast, please let me know the URL that you copied.")
+                    self.showSimpleAlert(title: "Oops", message: "Unable to load this broadcast, please let developer know the URL that you copied.")
                 }
             }, cancelHandler: { _ in
                 UIPasteboard.general.string = ""
@@ -331,6 +339,11 @@ class HomeViewController: UIViewController {
             }
         }
     }
+    
+    func openBroadcastModerationVC(broadcast: Broadcast) {
+        let broadcastModerationVC = UINavigationController(rootViewController: BroadcastModerationViewController(broadcast: broadcast))
+        self.present(broadcastModerationVC, animated: true, completion: nil)
+    }
 }
 
 extension HomeViewController: UITableViewDataSource {
@@ -344,7 +357,7 @@ extension HomeViewController: UITableViewDataSource {
             return UITableViewCell()
         }
         
-        cell.configure(broadcast: self.broadcasts[indexPath.row])
+        cell.configure(broadcast: self.broadcasts[indexPath.row], moderatorView: false)
         cell.subscribeButton.addTarget(self, action: #selector(subscribeButtonTapped(starButton:)), for: .touchUpInside)
         cell.subscribeButton.tag = indexPath.row
         
@@ -382,15 +395,30 @@ extension HomeViewController: UITableViewDelegate {
         }
     }
     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let modAction = UITableViewRowAction(style: .normal, title: "Mod") { action, index in
-            let broadcast = self.broadcasts[indexPath.row]
-            let broadcastModerationVC = UINavigationController(rootViewController: BroadcastModerationViewController(broadcast: broadcast))
-            self.present(broadcastModerationVC, animated: true, completion: nil)
-        }
-        modAction.backgroundColor = Colors.primaryGreen
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
 
-        return [modAction]
+        let action =  UIContextualAction(style: .normal, title: "", handler: { (action, view, completionHandler ) in
+            let broadcast = self.broadcasts[indexPath.row]
+            let subreddit = broadcast.post.subreddit.name
+            
+            if !SettingsService.shared.isRpanMod(for: subreddit) {
+                let message = "You aren't a mod of r/\(subreddit), some actions may not work as expected. Broadcasts with the green shield are able to be moderated by you."
+                self.showSimpleAlert(title: "Heads up", message: message, onceToken: "mod-prompt3") { _ in
+                    self.openBroadcastModerationVC(broadcast: broadcast)
+                }
+            }
+            else {
+                self.openBroadcastModerationVC(broadcast: broadcast)
+            }
+            
+            completionHandler(true)
+        })
+        
+        action.image = #imageLiteral(resourceName: "shield-icon-large")
+        action.backgroundColor = Colors.primaryGreen
+        let configuration = UISwipeActionsConfiguration(actions: [action])
+
+        return configuration
     }
 }
 

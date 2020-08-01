@@ -1,5 +1,5 @@
 //
-//  NotificationSettingCell.swift
+//  TitleAndSwitchCell.swift
 //  RPAN
 //
 //  Created by Erik Villegas on 7/16/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class NotificationSettingCell: UITableViewCell {
+class TitleAndSwitchCell: UITableViewCell {
     let titleLabel = UILabel(labelInit: {
         $0.font = Fonts.regular.size16
         $0.textColor = Colors.primaryOrange

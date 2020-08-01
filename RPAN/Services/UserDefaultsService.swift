@@ -19,6 +19,8 @@ enum UserDefaultsKey: String {
     case unsubscribedUserList
     case appConfig
     case redditAccessToken
+    case moderatedSubreddits
+    case rpanSubreddits
 }
 
 final class UserDefaultsService {
@@ -53,6 +55,16 @@ final class UserDefaultsService {
         else {
             self.setObject([element], forKey: key)
         }   
+    }
+    
+    func add(_ elements: [String], forKey key: UserDefaultsKey) {
+        if var existingArray = self.object(forKey: key) as? [String] {
+            existingArray += elements
+            self.setObject(existingArray, forKey: key)
+        }
+        else {
+            self.setObject(elements, forKey: key)
+        }
     }
     
     func setObject(_ value: Any, forKey key: UserDefaultsKey) {

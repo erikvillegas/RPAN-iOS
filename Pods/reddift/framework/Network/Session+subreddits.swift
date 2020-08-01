@@ -172,15 +172,15 @@ extension Session {
      - returns: Data task which requests search to reddit.com.
      */
     @discardableResult
-    public func about(_ subreddit: Subreddit, aboutWhere: SubredditAbout, user: String = "", count: Int = 0, limit: Int = 25, completion: @escaping (Result<[User]>) -> Void) throws -> URLSessionDataTask {
+    public func about(_ subreddit: String, aboutWhere: SubredditAbout, user: String = "", count: Int = 0, limit: Int = 25, completion: @escaping (Result<[User]>) -> Void) throws -> URLSessionDataTask {
         let parameter = [
             "count": "\(count)",
             "limit": "\(limit)",
-            "show": "all"
+            "show": "all",
 //          "sr_detail": "true",
-//          "user"     :"username"
+            "user"     : user
             ]
-        let path = "/r/\(subreddit.displayName)/about/\(aboutWhere.rawValue)"
+        let path = "/r/\(subreddit)/about/\(aboutWhere.rawValue)"
         guard let request = URLRequest.requestForOAuth(with: baseURL, path: path, parameter: parameter, method: "GET", token: token)
             else { throw ReddiftError.canNotCreateURLRequest as NSError }
         let closure = {(data: Data?, response: URLResponse?, error: NSError?) -> Result<[User]> in

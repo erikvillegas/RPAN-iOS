@@ -39,10 +39,6 @@ class Strapi {
                 let url = self.baseUrl.appendingPathComponent("broadcasts").appendingPathComponent(id)
                 let request = Session.default.request(url, method: .get, headers: ["Authorization": "Bearer \(accessToken.value)"])
                 
-                request.responseString { result in
-                    print(result.value)
-                }
-                
                 return request.responseDecodable(type: RedditResponse<Broadcast>.self).map { $0.data }
             }
         }
@@ -57,13 +53,7 @@ class Strapi {
         let request = Session.default.request(url, method: .get)
         
         return request.responseString().map { string in
-            // (?:"accessToken":")(.*?)(?:")
-            let regex = try? NSRegularExpression(pattern: "(?:\"accessToken\":\")(.*?)(?:\")", options: [.caseInsensitive])
-            let range = NSRange(location: 0, length: string.count)
-            let match = regex?.firstMatch(in: string, options: [], range: range)
-
-            if let match = match, match.numberOfRanges == 2 {
-                let value = (string as NSString).substring(with: match.range(at: 1))
+            if let value = string.matchRegexSingle("(?:\"accessToken\":\")(.*?)(?:\")") {
                 let accessToken = RedditAccessToken(value: value, expiration: Date().addingTimeInterval(3600))
                 
                 UserDefaultsService.shared.setCodableObject(accessToken, forKey: .redditAccessToken)

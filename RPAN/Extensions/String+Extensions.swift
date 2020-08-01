@@ -79,6 +79,18 @@ extension String {
             return self.prefix(limit) + leader
         }
     }
+    
+    func matchRegexSingle(_ regex: String) -> String? {
+        let regex = try? NSRegularExpression(pattern: regex, options: [.caseInsensitive])
+        let range = NSRange(location: 0, length: self.count)
+        let match = regex?.firstMatch(in: self, options: [], range: range)
+
+        if let match = match, match.numberOfRanges == 2 {
+            return (self as NSString).substring(with: match.range(at: 1))
+        }
+
+        return nil
+    }
 }
 
 extension Array where Element == String {

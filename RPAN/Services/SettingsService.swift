@@ -355,7 +355,7 @@ class SettingsService {
         return userSubscriptions.first(where: { $0.username == username }) != nil
     }
     
-    func fetchSubreddits() -> Promise<[RpanSubreddit]> {
+    func fetchRpanSubreddits() -> Promise<[RpanSubreddit]> {
         return self.ensureFirebaseAuth().then { _ -> Promise<[RpanSubreddit]> in
             let db = Firestore.firestore()
             return db.collection("subreddits").getDocumentsFromCollection().map { documents in
@@ -455,5 +455,23 @@ class SettingsService {
             
             return batch.commit()
         }
+    }
+    
+    func isRpanMod() -> Bool {
+        let moderatedSubreddits = UserDefaultsService.shared.codableObject(type: [ModeratedSubreddit].self, forKey: .moderatedSubreddits) ?? []
+        let rpanSubreddits = UserDefaultsService.shared.codableObject(type: [RpanSubreddit].self, forKey: .rpanSubreddits) ?? []
+        
+        for rpanSubreddit in rpanSubreddits {
+            if moderatedSubreddits.contains(where: { $0.displayName == rpanSubreddit.name }) {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func isRpanMod(for subreddit: String) -> Bool {
+        let moderatedSubreddits = UserDefaultsService.shared.codableObject(type: [ModeratedSubreddit].self, forKey: .moderatedSubreddits) ?? []
+        return moderatedSubreddits.map({ $0.displayName }).contains(subreddit)
     }
 }

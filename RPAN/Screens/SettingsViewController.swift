@@ -12,7 +12,7 @@ import PromiseKit
 import FirebaseCrashlytics
 
 class SettingsViewController: UIViewController {
-    let tableView = UITableView([ActionButtonCell.self, NotificationSettingCell.self, UserSubscriptionCell.self, DonationButtonCell.self], style: .grouped, {
+    let tableView = UITableView([ActionButtonCell.self, TitleAndSwitchCell.self, UserSubscriptionCell.self, DonationButtonCell.self], style: .grouped, {
         $0.rowHeight = UITableView.automaticDimension
         $0.contentInset = UIEdgeInsets(top: -30, left: 0, bottom: 0, right: 0)
     })
@@ -245,7 +245,7 @@ extension SettingsViewController: UITableViewDataSource {
             return cell
         case .notifications:
             if indexPath.row == 0 {
-                guard let cell = tableView.dequeueReusableCell(withIdentifier: NotificationSettingCell.reuseId, for: indexPath) as? NotificationSettingCell else {
+                guard let cell = tableView.dequeueReusableCell(withIdentifier: TitleAndSwitchCell.reuseId, for: indexPath) as? TitleAndSwitchCell else {
                     return UITableViewCell()
                 }
                 

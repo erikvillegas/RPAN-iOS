@@ -55,7 +55,7 @@
 		158F263324C0BA430007CE60 /* UserSubscriptionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263224C0BA430007CE60 /* UserSubscriptionCell.swift */; };
 		158F263524C0BA570007CE60 /* SettingsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263424C0BA570007CE60 /* SettingsDataSource.swift */; };
 		158F263724C0BA7A0007CE60 /* TitleDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263624C0BA7A0007CE60 /* TitleDetailCell.swift */; };
-		158F263924C0BA9B0007CE60 /* NotificationSettingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263824C0BA9B0007CE60 /* NotificationSettingCell.swift */; };
+		158F263924C0BA9B0007CE60 /* TitleAndSwitchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263824C0BA9B0007CE60 /* TitleAndSwitchCell.swift */; };
 		158F263B24C0BAD10007CE60 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263A24C0BAD10007CE60 /* User.swift */; };
 		158F263D24C0BADE0007CE60 /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263C24C0BADE0007CE60 /* NotificationNames.swift */; };
 		158F263F24C0BAF10007CE60 /* UserSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F263E24C0BAF10007CE60 /* UserSubscription.swift */; };
@@ -71,6 +71,8 @@
 		158F265324C0BD0E0007CE60 /* RedditAPIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F265224C0BD0E0007CE60 /* RedditAPIError.swift */; };
 		158F265524C0BD1B0007CE60 /* RedditAccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F265424C0BD1A0007CE60 /* RedditAccessToken.swift */; };
 		158F265724C0CC700007CE60 /* BroadcastLoadingIndicatorMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 158F265624C0CC700007CE60 /* BroadcastLoadingIndicatorMethod.swift */; };
+		15AF112624D457E000C4161C /* CommentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AF112524D457E000C4161C /* CommentCell.swift */; };
+		15AF112824D470B400C4161C /* RemoveBroadcastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 15AF112724D470B400C4161C /* RemoveBroadcastViewController.swift */; };
 		15B763F524C48CE200D25092 /* tickler.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763DE24C48CC200D25092 /* tickler.caf */; };
 		15B763F624C48CE200D25092 /* hello.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763DF24C48CC300D25092 /* hello.caf */; };
 		15B763F724C48CE200D25092 /* confirmed.caf in Resources */ = {isa = PBXBuildFile; fileRef = 15B763E024C48CC500D25092 /* confirmed.caf */; };
@@ -187,7 +189,7 @@
 		158F263224C0BA430007CE60 /* UserSubscriptionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSubscriptionCell.swift; sourceTree = "<group>"; };
 		158F263424C0BA570007CE60 /* SettingsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsDataSource.swift; sourceTree = "<group>"; };
 		158F263624C0BA7A0007CE60 /* TitleDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleDetailCell.swift; sourceTree = "<group>"; };
-		158F263824C0BA9B0007CE60 /* NotificationSettingCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationSettingCell.swift; sourceTree = "<group>"; };
+		158F263824C0BA9B0007CE60 /* TitleAndSwitchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleAndSwitchCell.swift; sourceTree = "<group>"; };
 		158F263A24C0BAD10007CE60 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		158F263C24C0BADE0007CE60 /* NotificationNames.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		158F263E24C0BAF10007CE60 /* UserSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSubscription.swift; sourceTree = "<group>"; };
@@ -203,6 +205,8 @@
 		158F265224C0BD0E0007CE60 /* RedditAPIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditAPIError.swift; sourceTree = "<group>"; };
 		158F265424C0BD1A0007CE60 /* RedditAccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditAccessToken.swift; sourceTree = "<group>"; };
 		158F265624C0CC700007CE60 /* BroadcastLoadingIndicatorMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BroadcastLoadingIndicatorMethod.swift; sourceTree = "<group>"; };
+		15AF112524D457E000C4161C /* CommentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentCell.swift; sourceTree = "<group>"; };
+		15AF112724D470B400C4161C /* RemoveBroadcastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveBroadcastViewController.swift; sourceTree = "<group>"; };
 		15B763DE24C48CC200D25092 /* tickler.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = tickler.caf; sourceTree = "<group>"; };
 		15B763DF24C48CC300D25092 /* hello.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = hello.caf; sourceTree = "<group>"; };
 		15B763E024C48CC500D25092 /* confirmed.caf */ = {isa = PBXFileReference; lastKnownFileType = file; path = confirmed.caf; sourceTree = "<group>"; };
@@ -371,7 +375,7 @@
 				15B7640C24C49BB400D25092 /* SoundsViewController.swift */,
 				15641D6D24CADD5900232E70 /* BroadcastModerationViewController.swift */,
 				15F86B3424CD067A00718272 /* BanUserViewController.swift */,
-				15F86B3624CD145200718272 /* Session+Extensions.swift */,
+				15AF112724D470B400C4161C /* RemoveBroadcastViewController.swift */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
@@ -379,6 +383,7 @@
 		1520628E24B5208100D47F2E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				15F86B3624CD145200718272 /* Session+Extensions.swift */,
 				152062B524B5238900D47F2E /* CustomJSONDecoder.swift */,
 				152062B424B5238900D47F2E /* CustomJSONEncoder.swift */,
 				1520629024B5215A00D47F2E /* Array+Extensions.swift */,
@@ -452,9 +457,10 @@
 				158F263024C0BA2F0007CE60 /* DonationButtonCell.swift */,
 				158F263224C0BA430007CE60 /* UserSubscriptionCell.swift */,
 				158F263624C0BA7A0007CE60 /* TitleDetailCell.swift */,
-				158F263824C0BA9B0007CE60 /* NotificationSettingCell.swift */,
+				158F263824C0BA9B0007CE60 /* TitleAndSwitchCell.swift */,
 				15B7640E24C5128800D25092 /* NotificationSoundCell.swift */,
 				15B7641224C5A5C900D25092 /* SubredditCell.swift */,
+				15AF112524D457E000C4161C /* CommentCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -721,6 +727,7 @@
 				151CF87124B9018C00C4C3D8 /* LoginService.swift in Sources */,
 				15F86B3724CD145200718272 /* Session+Extensions.swift in Sources */,
 				151CF88824BA8E9A00C4C3D8 /* UserDefaultsService.swift in Sources */,
+				15AF112824D470B400C4161C /* RemoveBroadcastViewController.swift in Sources */,
 				152062B624B5238900D47F2E /* CustomJSONEncoder.swift in Sources */,
 				152062A324B521C300D47F2E /* KeyedDecodingContainerExtensions.swift in Sources */,
 				1520627924B502E900D47F2E /* AppDelegate.swift in Sources */,
@@ -743,9 +750,10 @@
 				1520629D24B521A300D47F2E /* Dictionary+Extensions.swift in Sources */,
 				158F264D24C0BC650007CE60 /* Firestore+Extensions.swift in Sources */,
 				152062A924B5224B00D47F2E /* UIColor+Extensions.swift in Sources */,
-				158F263924C0BA9B0007CE60 /* NotificationSettingCell.swift in Sources */,
+				158F263924C0BA9B0007CE60 /* TitleAndSwitchCell.swift in Sources */,
 				15F86B3924CDB4F600718272 /* ModerationService.swift in Sources */,
 				152062C224B52BDE00D47F2E /* Strapi.swift in Sources */,
+				15AF112624D457E000C4161C /* CommentCell.swift in Sources */,
 				152062A724B5223100D47F2E /* String+NumberFormatting.swift in Sources */,
 				152062A124B521BD00D47F2E /* Int+Extensions.swift in Sources */,
 				158F262D24C0BA000007CE60 /* UIViewController+Extensions.swift in Sources */,
@@ -800,7 +808,7 @@
 			baseConfigurationReference = 1055CEF272BDC95EFF50B9C9 /* Pods-RPANNotifications.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 267282ZNF9;
 				INFOPLIST_FILE = RPANNotifications/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -822,7 +830,7 @@
 			baseConfigurationReference = A73DA5761E9D91E48DCC7D66 /* Pods-RPANNotifications.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 267282ZNF9;
 				INFOPLIST_FILE = RPANNotifications/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -961,7 +969,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = RPAN/RPAN.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 267282ZNF9;
 				INFOPLIST_FILE = RPAN/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
@@ -984,7 +992,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = RPAN/RPAN.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 5;
+				CURRENT_PROJECT_VERSION = 6;
 				DEVELOPMENT_TEAM = 267282ZNF9;
 				INFOPLIST_FILE = RPAN/Resources/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;

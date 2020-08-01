@@ -453,7 +453,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   reddift:
-    :commit: d3d2f5a0f5db9dde24a18210524aa6b5f61ea89a
+    :commit: 4436122a718a24b9b7edbfb145be212fb48097e0
     :git: https://github.com/erikvillegas/reddift
 
 SPEC CHECKSUMS:

@@ -96,9 +96,21 @@ class BroadcastCell: UITableViewCell {
         $0.setImage(#imageLiteral(resourceName: "star-selected"), for: .selected)
     })
     
-    lazy var subredditStackView = UIStackView([self.subredditMaskView, self.subredditLabel]) {
+    let removalButton = UIButton(buttonInit: {
+        $0.setImage(#imageLiteral(resourceName: "trash-icon"), for: .normal)
+        $0.isHidden = true
+    })
+    
+    let moderatorImageView = UIImageView(imageViewInit: {
+        $0.image = #imageLiteral(resourceName: "shield-icon-small")
+        $0.size(CGSize(width: 10, height: 12))
+    })
+    
+    lazy var subredditStackView = UIStackView([self.subredditMaskView, self.subredditLabel, self.moderatorImageView, SpacerView.horizontal]) {
         $0.axis = .horizontal
+        $0.alignment = .center
         $0.spacing = 4.0
+        $0.setCustomSpacing(5.0, after: self.subredditLabel)
     }
     
     lazy var labelStackView = UIStackView([self.titleLabel, self.usernameLabel, self.detailLabel, self.subredditStackView, SpacerView.vertical]) {
@@ -108,7 +120,7 @@ class BroadcastCell: UITableViewCell {
     
     let mainStackViewSpacerView = SpacerView.horizontal
     
-    lazy var mainStackView = UIStackView([self.thumbnailStackView, self.labelStackView, self.mainStackViewSpacerView, self.subscribeButton]) {
+    lazy var mainStackView = UIStackView([self.thumbnailStackView, self.labelStackView, self.mainStackViewSpacerView, self.subscribeButton, self.removalButton]) {
         $0.axis = .horizontal
         $0.spacing = 0
         $0.setCustomSpacing(16, after: self.thumbnailStackView)
@@ -136,12 +148,11 @@ class BroadcastCell: UITableViewCell {
         let selectedBackgroundView = UIView()
         selectedBackgroundView.backgroundColor = Colors.dynamicCellSelected
         self.selectedBackgroundView = selectedBackgroundView
-        
     }
     
     required init?(coder: NSCoder) { fatalError() }
     
-    func configure(broadcast: Broadcast) {
+    func configure(broadcast: Broadcast, moderatorView: Bool) {
         self.thumbnailImageView.kf.setImage(with: broadcast.stream.thumbnail, placeholder: #imageLiteral(resourceName: "thumbnail-default"))
         self.titleLabel.text = broadcast.post.title
         self.usernameLabel.text = "u/" + broadcast.broadcaster
@@ -179,5 +190,12 @@ class BroadcastCell: UITableViewCell {
         else {
             self.thumbnailAwardImageView.isHidden = true
         }
+        
+        let moderatedSubreddits = UserDefaultsService.shared.codableObject(type: [ModeratedSubreddit].self, forKey: .moderatedSubreddits) ?? []
+        let isMod = moderatedSubreddits.map({ $0.displayName }).contains(broadcast.post.subreddit.name)
+        self.moderatorImageView.isHidden = !isMod
+        
+        self.subscribeButton.isHidden = moderatorView
+        self.removalButton.isHidden = !moderatorView
     }
 }

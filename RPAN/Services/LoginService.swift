@@ -31,7 +31,7 @@ class LoginService {
     @discardableResult
     func authenticateWithReddit() -> Bool {
         do {
-            try OAuth2Authorizer.sharedInstance.challengeWithScopes(["identity", "mysubreddits", "read", "modcontributors", "subscribe", "vote", "submit", "modposts", "edit", "history"])
+            try OAuth2Authorizer.sharedInstance.challengeWithScopes(["identity", "mysubreddits", "read", "modcontributors", "subscribe", "vote", "submit", "modposts", "edit"])
             return true
         }
         catch {

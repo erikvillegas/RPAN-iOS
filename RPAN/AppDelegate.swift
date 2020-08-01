@@ -57,6 +57,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, MessagingDelegate {
             UserDefaultsService.shared.setCodableObject(config, forKey: .appConfig)
         }.cauterize()
         
+        ModerationService.shared.moderatedSubreddits().done { subreddits in
+            UserDefaultsService.shared.setCodableObject(subreddits, forKey: .moderatedSubreddits)
+        }.cauterize()
+        
+        SettingsService.shared.fetchRpanSubreddits().done { subreddits in
+            UserDefaultsService.shared.setCodableObject(subreddits, forKey: .rpanSubreddits)
+        }.cauterize()
+        
         return true
     }
 

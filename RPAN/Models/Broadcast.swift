@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Broadcast: Decodable {
+public struct Broadcast: Decodable {
     struct Meter: Decodable {
         let proportionFull: Double
     }

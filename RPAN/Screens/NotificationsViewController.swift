@@ -114,7 +114,7 @@ extension NotificationsViewController: UITableViewDataSource {
         if indexPath.section == 0 {
             switch indexPath.row {
             case 0:
-                let cell = NotificationSettingCell(style: .default, reuseIdentifier: nil)
+                let cell = TitleAndSwitchCell(style: .default, reuseIdentifier: nil)
                 cell.configure(title: "Notify when going live", enabled: self.userSubscription.notify)
                 cell.enabledSwitch.addTarget(self, action: #selector(notificationSwitchToggled(sender:)), for: .valueChanged)
                 
@@ -143,7 +143,7 @@ extension NotificationsViewController: UITableViewDataSource {
                 
                 return cell
             case 3:
-                let cell = NotificationSettingCell(style: .default, reuseIdentifier: nil)
+                let cell = TitleAndSwitchCell(style: .default, reuseIdentifier: nil)
                 cell.configure(title: "Cooldown Enabled", enabled: self.userSubscription.cooldown)
                 cell.enabledSwitch.addTarget(self, action: #selector(cooldownSwitchToggled(sender:)), for: .valueChanged)
                 

@@ -68,7 +68,7 @@ class SubredditBlacklistViewController: UIViewController {
     func fetchSubreddits() {
         self.displayToast(message: "Connecting to Reddit...", theme: .info, duration: .indefinite(delay: 1.0, minimum: 2.0))
         
-        SettingsService.shared.fetchSubreddits().done { subreddits in
+        SettingsService.shared.fetchRpanSubreddits().done { subreddits in
             self.subreddits = subreddits
             self.tableView.reloadData()
         }.catch { error in
