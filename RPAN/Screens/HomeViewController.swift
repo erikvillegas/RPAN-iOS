@@ -63,7 +63,7 @@ class HomeViewController: UIViewController {
         self.view.addSubview(self.errorLabel)
         self.errorLabel.centerInSuperview()
         
-        self.navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "app-logo"))
+        self.navigationItem.titleView = UIImageView(image: #imageLiteral(resourceName: "sidekick-logo"))
         
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "account-icon"), style: .plain, target: self, action: #selector(accountButtonTapped))
         
