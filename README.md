@@ -1,7 +1,5 @@
 # RPAN Companion (iOS)
 
-[Check here](https://erikvillegas.github.io) for instructions on installing this app on your iOS device!
-
 ### What is this?
 RPAN Companion makes it easy to see who is streaming on RPAN. It's like a slightly prettier version of [RPAN Lister](https://dextronix.github.io/RPAN-lister/). Watched a cool stream? Simply tap the star to have their streams pinned to the top whenever they're next online. You can even enable notifications to receive a push within seconds of the broadcaster going live! To help manage notification chaos, the app provides plenty of configuration options so you can tweak them per your liking.
 
